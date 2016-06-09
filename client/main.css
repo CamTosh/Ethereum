@@ -38,14 +38,7 @@ body {
 	text-align: center;
 	color: #fff;
 }
-.stock .hash {
-	position: absolute;
-	left: 0;
-	right: 0;
-	text-align: center;
-	color: #fff;
-}
-.stock .balance {
+.stock .valeur {
 	position: absolute;
 	left: 0;
 	right: 0;
@@ -54,7 +47,6 @@ body {
 }
 .stock .symbol {
 	top: 10px;
-	text-transform: uppercase;
 	font-size: 12px;
 	font-weight: 300;
 }
@@ -65,7 +57,13 @@ body {
 	-webkit-transform: translateY(-50%);
 					transform: translateY(-50%);
 }
-
+.stock .valeur {
+	top: 75%;
+	font-size: 18px;
+	font-weight: 700;
+	-webkit-transform: translateY(-50%);
+					transform: translateY(-50%);
+}
 .stock .balance {
 	top: 25%;
 	font-size: 22px;
