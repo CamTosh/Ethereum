@@ -133,6 +133,19 @@ class RpcJson(object):
 		return res['result']
 
 
+	def getEuroBalance(self):
+
+		r = requests.get("https://www.cryptocompare.com/api/data/price?fsym=ETH&tsyms=EUR")
+		res = r.json()
+
+		for i in res['Data']:
+			i['Price']
+
+		b = self.getBalance()
+
+		return str(b / 1000000000000000000 * i['Price'])[:5]
+
+
 	def getCoinbase(self):
 		c = self.json('eth_coinbase', 'ether')
 		return c

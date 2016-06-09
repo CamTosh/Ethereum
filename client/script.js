@@ -59,7 +59,7 @@ function color_label() {
 
 function repeatMe(){
 	$.ajax({
-		url: '', // Url de l'api
+		url: '', // Url du serveur
 		dataType: 'json',
 		cache: false,
 		timeout: 1000,
@@ -81,16 +81,7 @@ function repeatMe(){
 			$(".heatvalue").text(r.Heat);
 			$(".hashvalue").text(r.Hash);
 			$(".gainvalue").text(r.Balance / 1000000000000000000);
-		},
-	});
-	$.ajax({
-		url: 'https://www.cryptocompare.com/api/data/price?fsym=ETH&tsyms=EUR',
-		dataType: 'json',
-		cache: false,
-		timeout: 1000,
-		success: function(data) {
-			var eur = data.Data[0].Price;
-			$(".eurvalue").text(r.Balance * eur / 1000000000000000000);
+			$(".eurvalue").text(r.Euro);
 		},
 	});
 }
