@@ -55,11 +55,9 @@ function color_label() {
 
 	console.log("color set");
 }
-
-
 function repeatMe(){
 	$.ajax({
-		url: '', // Url du serveur
+		url: '', // Url de l'api
 		dataType: 'json',
 		cache: false,
 		timeout: 1000,
@@ -70,20 +68,23 @@ function repeatMe(){
 		  	r = data;
 		    $(".serverName").text(r.Name);
 		    $(".serverIp").text(r.Ip);
-		    $(".fanvalue").text(r.FanSpeed);
-			$(".loadvalue").text(r.Load);
-			$(".clockvalue").text(r.CurrentClock);
-			$(".memvalue").text(r.CurrentMem);
+		    $(".fanvalue").text(r.FanSpeed + "%");
+			$(".loadvalue").text(r.Load + "%");
+			$(".clockvalue").text(r.CurrentClock + " mHz");
+			$(".memvalue").text(r.CurrentMem + " mHz");
 			/*
 			$(".maxClockvalue").text(r.MaxClock);
 			$(".maxMemValue").text(r.MaxMem);
 			*/
-			$(".heatvalue").text(r.Heat);
-			$(".hashvalue").text(r.Hash);
-			$(".gainvalue").text(r.Balance / 1000000000000000000);
-			$(".eurvalue").text(r.Euro);
+			$(".heatvalue").text(r.Heat + "°c");
+			$(".hashvalue").text(r.Hash + " mH/s");
+			s = r.Balance /1000000000000000000;
+			$(".gainvalue").text(s.toFixed(5) + "Ξ");
+			$(".eurvalue").text(r.Euro + "€");
 		},
+
 	});
 }
+
 
 setInterval(repeatMe, 2000);

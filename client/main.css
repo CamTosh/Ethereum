@@ -30,6 +30,7 @@ body {
 	transition: box-shadow 0.2s ease;
 }
 
+.stock .valeur,
 .stock .symbol,
 .stock .change {
 	position: absolute;
@@ -38,13 +39,7 @@ body {
 	text-align: center;
 	color: #fff;
 }
-.stock .valeur {
-	position: absolute;
-	left: 0;
-	right: 0;
-	text-align: center;
-	color: #fff;
-}
+
 .stock .symbol {
 	top: 10px;
 	font-size: 12px;
@@ -67,24 +62,6 @@ body {
 .stock .balance {
 	top: 25%;
 	font-size: 22px;
-	font-weight: 700;
-	-webkit-transform: translateY(-50%);
-					transform: translateY(-50%);
-}
-
-.stock .hash {
-	top: 50%;
-	font-size: 22px;
-	font-style: italic;
-	font-weight: 700;
-	-webkit-transform: translateY(-50%);
-					transform: translateY(-50%);
-}
-
-.stock .gain {
-	top: 50%;
-	font-size: 22px;
-	font-style: italic;
 	font-weight: 700;
 	-webkit-transform: translateY(-50%);
 					transform: translateY(-50%);
