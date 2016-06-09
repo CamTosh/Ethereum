@@ -66,6 +66,7 @@ function repeatMe(){
 			color_label();
 
 		  	r = data;
+			//$(".uptime").text(r.Uptime);
 		    $(".serverName").text(r.Name);
 		    $(".serverIp").text(r.Ip);
 		    $(".fanvalue").text(r.FanSpeed + "%");
@@ -85,6 +86,3 @@ function repeatMe(){
 
 	});
 }
-
-
-setInterval(repeatMe, 2000);

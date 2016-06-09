@@ -11,6 +11,7 @@ from bottle import route, run, request, response
 import json
 import socket
 import netifaces as ni
+from datetime import timedelta
 
 
 class GPUInfo(object):
@@ -40,6 +41,7 @@ class GPUInfo(object):
 		info = self.getInformation("lsmod")
 		if "fglrx" in info:
 			return True
+		print("The 'fglrx' module is not currently loaded, or the AMD Catalyst software is not properly installed.")
 		sys.exit(1)
 
 
@@ -50,6 +52,7 @@ class GPUInfo(object):
 		try:
 			info = check_output(command)
 		except OSError:
+			print("The command '{0}' software cannot be found.".format(command[0]))
 			sys.exit(1)
 		
 		return info.decode(self.encoding)
@@ -64,7 +67,9 @@ class GPUInfo(object):
 				load_match = re.search(r"GPU load\D+(\d+)%", line)
 				if load_match:
 					return load_match.group(1)
+					print(load_match.group(1))
 			except IndexError:
+				print("Unable to parse output from the 'aticonfig' command.")
 				sys.exit(1)
 
 
@@ -75,15 +80,17 @@ class GPUInfo(object):
 			fan_match = re.search("(\d{1,3})%", info)
 			return fan_match.group(1)
 		except IndexError:
+			print("Unable to parse output from the 'aticonfig' command.")
 			sys.exit(1)
 
 
 	def getCurrentClock(self, gpu_or_mem, adapter=0):
 		
 		if gpu_or_mem not in self.gpu_mem_posit:
+			print("getCurrentClock only supports options 'gpu' or 'mem'.")
 			sys.exit(1)
 		info = self.getInformation("odgc").split("\n")
-		current_clock_regex = re.compile(r'Current Clocks\D+(\d+)\s+(\d+)') # J'ai corrigé le soucis.
+		current_clock_regex = re.compile(r'Current Clocks\D+(\d+)\s+(\d+)')
 		
 		for line in info:
 			current_clock_match = current_clock_regex.search(line)
@@ -94,6 +101,7 @@ class GPUInfo(object):
 	def getMaxClock(self, gpu_or_mem, adapter=0):
 		
 		if gpu_or_mem not in self.gpu_mem_posit:
+			print("getMaxClock only supports options 'gpu' or 'mem'.")
 			sys.exit(1)
 		info = self.getInformation("odgc", adapter).split("\n")
 		max_clock_regex = re.compile(r'Current Peak\D+(\d+)\s+(\d+)')
@@ -111,6 +119,7 @@ class GPUInfo(object):
 			temp_match = re.search(r'(\d{2,3})\.\d{2} C', info)
 			return temp_match.group(1)
 		except IndexError:
+			print("Could not parse temperature data.")
 			sys.exit(1)
 
 
@@ -132,7 +141,6 @@ class RpcJson(object):
 		res = r.json()
 		return res['result']
 
-
 	def getEuroBalance(self):
 
 		r = requests.get("https://www.cryptocompare.com/api/data/price?fsym=ETH&tsyms=EUR")
@@ -145,8 +153,8 @@ class RpcJson(object):
 
 		return str(b / 1000000000000000000 * i['Price'])[:5]
 
-
 	def getCoinbase(self):
+		# 10546208120000000000
 		c = self.json('eth_coinbase', 'ether')
 		return c
 
@@ -170,6 +178,13 @@ class RpcJson(object):
 		return a
 
 
+def get_uptime():
+
+	with open('/proc/uptime', 'r') as f:
+	    uptime_seconds = float(f.readline().split()[0])
+	    uptime_string = str(timedelta(seconds = uptime_seconds))
+
+	    return uptime_string
 
 def get_name():
 	return socket.gethostname()
@@ -186,10 +201,12 @@ def dico():
 	d = {}
 	ip = get_ip()
 	g = GPUInfo()
-	r = RpcJson(ip, 8008) # mettre le port de Geth
+	r = RpcJson("localhost", 8008)
 
+	d['Uptime'] = get_uptime()
 	d['Hash'] = r.getHashrate()
 	d['Balance'] = r.getBalance()
+	d['Euro'] = r.getEuroBalance()
 	#d['Accounts'] = r.getAccounts()
 	d['Name'] = get_name()
 	d['Ip'] = get_ip()

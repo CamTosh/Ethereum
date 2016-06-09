@@ -39,17 +39,19 @@ Lance ethminer sur les 4 cartes graphiques sur le serveur Geth.
 
 ```Json
 {
-	Ip: "10.42.69.42",
-	Hash: 27295937,
-	Balance: 42694269420000000000,
-	Name: "MiningRig001",
 	CurrentClock: "1100",
+	Name: "MiningRig001",
+	Uptime: "1 day, 0:02:12.990000",
 	MaxClock: "1100",
-	MaxMem: "1500",
-	Heat: "73",
-	Load: "99",
+	Load: "100",
 	FanSpeed: "100",
+	Heat: "81",
+	MaxMem: "1500",
+	Euro: "541.38",
+	Information: " Adapter 0 - Supported device 67B1 Core (MHz) Memory (MHz) Current Clocks : 1100 1500 Current Peak : 1100 1500 Configurable Peak Range : [300-1500] [150-2000] GPU load : 100% ",
+	Ip: "10.42.69.42",
 	CurrentMem: "1500",
-	Information: " Adapter 0 - Supported device 67B1 Core (MHz) Memory (MHz) Current Clocks : 1100 1500 Current Peak : 1100 1500 Configurable Peak Range : [300-1500] [150-2000] GPU load : 97% "
+	Balance: 42694269420000000000,
+	Hash: 27810954
 }
 ```
