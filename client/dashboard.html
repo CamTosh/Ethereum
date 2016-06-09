@@ -14,14 +14,14 @@
 			<span class="change serverIp"></span>		
 		</div>
 
-		<div class="stock server">
+		<div class="stock gain">
 			<span class="symbol">Gain (ether)</span>
-			<span class="change gain"></span>
+			<span class="change gainvalue"></span>
 		</div>
 
-		<div class="stock server">
+		<div class="stock hash">
 			<span class="symbol">Hash (MHash/s)</span>
-			<span class="change hash"></span>
+			<span class="change hashvalue"></span>
 		</div>
 		
 		<div class="stock load">
@@ -34,7 +34,6 @@
 			<span class="change fanvalue"></span>
 		</div>
 		
-
 		
 		<div class="stock heat">
 			<span class="symbol">Heat (°c)</span>
@@ -64,89 +63,7 @@
 		-->
 	</div>
 
-	<script src="js/jquery-2.2.4.min.js"></script>
-	<script type="text/javascript">
-				
-	function color_label() {
-
-
-		$('.fanvalue').each(function(i, n) {
-
-		   if($(n).text() >= 80) $('.fan').css('background-color', '#db5959');
-		   else if($(n).text() >= 50) $('.fan').css('background-color', '#fdca41');
-		   else $('.fan').css('background-color', '#68b665');
-
-		});
-
-
-		$('.loadvalue').each(function(i, n) {
-
-		   if($(n).text() >= 80) $('.load').css('background-color', '#db5959');
-		   else if($(n).text() >= 50) $('.load').css('background-color', '#fdca41');
-		   else $('.load').css('background-color', '#68b665');
-
-		});
-
-		
-		$('.clockvalue').each(function(i, n) {
-
-		   if($(n).text() >= 3) $('.clock').css('background-color', '#db5959');
-		   else $('.clock').css('background-color', '#68b665');
-
-		});
-
-
-		$('.memvalue').each(function(i, n) {
-
-		   if($(n).text() >= 3) $('.memory').css('background-color', '#db5959');
-		   else $('.memory').css('background-color', '#68b665');
-
-		});
-
-
-		$('.heatvalue').each(function(i, n) {
-
-		   if($(n).text() > 70) $('.heat').css('background-color', '#db5959');
-		   else if($(n).text() >= 50) $('.heat').css('background-color', '#fdca41');
-		   else $('.heat').css('background-color', '#68b665');
-
-		});		
-
-		console.log("color set");
-	}
-
-
-	function loop(){
-		$.ajax({
-			url: '', // Url de l'api 
-			dataType: 'json',
-			cache: true,
-			timeout: 5000,
-			success: function(data) {
-
-				color_label();
-
-			  	r = data;
-			    $(".serverName").text(r.Name);
-			    $(".serverIp").text(r.Ip);
-			    $(".fanvalue").text(r.FanSpeed);
-				$(".loadvalue").text(r.Load);
-				$(".clockvalue").text(r.CurrentClock);
-				$(".memvalue").text(r.CurrentMem);
-				/*
-				$(".maxClockvalue").text(r.MaxClock);
-				$(".maxMemValue").text(r.MaxMem);
-				*/
-				$(".heatvalue").text(r.Heat);
-				$(".gain").text(r.Balance / 1000000000000000000);
-				$(".hash").text(r.Hash);
-			},
-		});
-	}
-
-	setInterval(loop, 1000);
-	
-
-	</script>
 </body>
+	<script src="jquery-2.2.4.min.js"></script> 
+	<script src="script.js"></script>
 </html>
