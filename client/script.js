@@ -69,20 +69,22 @@ function repeatMe(){
 			//$(".uptime").text(r.Uptime);
 		    $(".serverName").text(r.Name);
 		    $(".serverIp").text(r.Ip);
-		    $(".fanvalue").text(r.FanSpeed + "%");
-			$(".loadvalue").text(r.Load + "%");
-			$(".clockvalue").text(r.CurrentClock + " mHz");
-			$(".memvalue").text(r.CurrentMem + " mHz");
+		    $(".fanvalue").text(r.FanSpeed);
+			$(".loadvalue").text(r.Load);
+			$(".clockvalue").text(r.CurrentClock);
+			$(".memvalue").text(r.CurrentMem);
 			/*
 			$(".maxClockvalue").text(r.MaxClock);
 			$(".maxMemValue").text(r.MaxMem);
 			*/
-			$(".heatvalue").text(r.Heat + "°c");
-			$(".hashvalue").text(r.Hash + " mH/s");
+			$(".heatvalue").text(r.Heat );
+			$(".hashvalue").text(r.Hash);
 			s = r.Balance /1000000000000000000;
-			$(".gainvalue").text(s.toFixed(5) + "Ξ");
-			$(".eurvalue").text(r.Euro + "€");
+			$(".gainvalue").text(s.toFixed(5));
+			$(".eurvalue").text(r.Euro );
 		},
 
 	});
 }
+
+setInterval(repeatMe, 2000);
