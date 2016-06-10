@@ -9,12 +9,12 @@ geth --rpc --rpcaddr adresseIpDeVotreServeur --rpcport lePort console
 ```
 Lance le serveur Geth avec un accés console.
 
-## Sur les machines :
+## Sur les machines (possédent 4 CG) :
 
 ```
 ethminer -G --opencl-device 0,1,2,3 --no-precompute -F ip:portDuServeurGeth
 ```
-Lance ethminer sur les 4 cartes graphiques sur le serveur Geth.
+Lance ethminer sur les 4 cartes graphiques sur le serveur Geth. Si ça ne fonctionne pas il faut lancer ethminer sur 4 terminal différents avec à chaque fois un device différents.
 
 # API
 
@@ -52,6 +52,6 @@ Lance ethminer sur les 4 cartes graphiques sur le serveur Geth.
 	Ip: "10.42.69.42",
 	CurrentMem: "1500",
 	Balance: 42694269420000000000,
-	Hash: 27810954
+	Hash: 127810954
 }
 ```
