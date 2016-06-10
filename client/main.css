@@ -66,3 +66,10 @@ body {
 	-webkit-transform: translateY(-50%);
 					transform: translateY(-50%);
 }
+.stock .valeur {
+	top: 75%;
+	font-size: 22px;
+	font-weight: 700;
+	-webkit-transform: translateY(-50%);
+					transform: translateY(-50%);
+}
