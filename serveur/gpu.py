@@ -1,5 +1,4 @@
 #!/bin/env python
-from eth_rpc_client import Client
 from subprocess import check_output
 import locale
 import re
@@ -123,61 +122,6 @@ class GPUInfo(object):
 			sys.exit(1)
 
 
-class RpcJson(object):
-
-	def __init__(self, ip, port):
-		self.ip = ip
-		self.port = port
-
-
-	def json (self, command, args = []):
-		payload = {
-			"method": command,
-			"params": args,
-			"jsonrpc": "2.0",
-			"id": 0,
-		}
-		r = requests.post('http://' + self.ip + ':' + str(self.port) + '/', data=json.dumps(payload), headers={'content-type': 'application/json'})
-		res = r.json()
-		return res['result']
-
-	def getEuroBalance(self):
-
-		r = requests.get("https://www.cryptocompare.com/api/data/price?fsym=ETH&tsyms=EUR")
-		res = r.json()
-
-		for i in res['Data']:
-			i['Price']
-
-		b = self.getBalance()
-
-		return str(b / 1000000000000000000 * i['Price'])[:5]
-
-	def getCoinbase(self):
-		# 10546208120000000000
-		c = self.json('eth_coinbase', 'ether')
-		return c
-
-
-	def getHashrate(self):
-
-		h = self.json('eth_hashrate')
-		return int(h, 16)
-
-
-	def getBalance(self):
-		c = self.getCoinbase()
-		l = (c, 'latest')
-		b = self.json('eth_getBalance', l)
-		return int(b, 16)
-
-
-	def getAccounts(self):
-
-		a = self.json('eth_getAccounts')
-		return a
-
-
 def get_uptime():
 
 	with open('/proc/uptime', 'r') as f:
@@ -201,13 +145,8 @@ def dico():
 	d = {}
 	ip = get_ip()
 	g = GPUInfo()
-	r = RpcJson("localhost", 8008)
 
 	d['Uptime'] = get_uptime()
-	d['Hash'] = r.getHashrate()
-	d['Balance'] = r.getBalance()
-	d['Euro'] = r.getEuroBalance()
-	#d['Accounts'] = r.getAccounts()
 	d['Name'] = get_name()
 	d['Ip'] = get_ip()
 	d['Load'] = str(g.getLoad())
@@ -236,4 +175,3 @@ if __name__ == '__main__':
 	
 	ip = get_ip()
 	run(host=ip, port=6969)
-
