@@ -1,0 +1,271 @@
+/* COMMON */
+
+* {
+	box-sizing: border-box;
+}
+
+body {
+	background-color: #EBEDF1;
+	font-family: "Open Sans", Helvetica, Arial, sans-serif;
+}
+
+.container {
+	margin: 0 auto;
+	padding: 0 1vw;
+	max-width: 1200px;
+	max-width: calc(1200px + 1vw);
+}
+
+/* HEADER */
+
+.header {
+	background: #FFF;
+	box-shadow: 0px 1px 2px 0px rgba(0,0,0,0.15);
+}
+
+.header .container {
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+  -ms-flex-pack: justify;
+  -ms-flex-align: center;
+
+	-webkit-box-pack: justify;
+	-webkit-justify-content: space-between;
+	justify-content: space-between;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	align-items: center;
+	-webkit-flex-wrap: wrap;
+	-ms-flex-wrap: wrap;
+	flex-wrap: wrap;
+}
+
+.header .container > * {
+	padding-top: 29px;
+	padding-bottom: 30px;
+}
+
+.header__servName {
+	color: #282828;
+	letter-spacing: 1.4px;
+	font-weight: bold;
+	font-size: 30px;
+	line-height: 41px;
+}
+
+.header__servIp {
+	color: #5D5D5D;
+	letter-spacing: 1px;
+	font-size: 20px;
+	line-height: 27px;
+}
+
+.header__statName {
+	margin-bottom: 5px;
+	color: #5D5D5D;
+	letter-spacing: 0.9px;
+	font-size: 20px;
+	line-height: 27px;
+}
+
+.header__statNumber {
+	color: #282828;
+	letter-spacing: 0.9px;
+	font-weight: bold;
+	font-size: 20px;
+	line-height: 27px;
+}
+
+.header__statUnit {
+	color: #757575;
+	letter-spacing: 0.72px;
+	font-size: 16px;
+	line-height: 22px;
+}
+
+/* MAIN CONTENT */
+
+main {
+	padding: 35px 0;
+}
+
+.serv {
+	overflow-x: hidden;
+	margin-bottom: 35px;
+	border-radius: 3px;
+	background-color: #F2F4F8;
+	box-shadow: 0px 1px 2px 0px rgba(0,0,0,0.15);
+}
+
+.serv__head {
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+  -ms-flex-pack: justify;
+  -ms-flex-align: center;
+	margin-bottom: 20px;
+	padding: 25px 20px;
+	background: #FFF;
+	box-shadow: 0px 1px 2px 0px rgba(0,0,0,0.07);
+
+	-webkit-box-pack: justify;
+	-webkit-justify-content: space-between;
+	justify-content: space-between;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	align-items: center;
+}
+
+.serv__status {
+	padding-right: 10px;
+	color: #EBEDF1;
+	font-size: 25px;
+	line-height: 24px;
+}
+
+.serv__status--up {
+	color: #7ED321;
+}
+
+.serv__status--down {
+		color: #FF5F2E
+}
+
+.serv__name {
+	display: inline;
+	color: #4A4A4A;
+	vertical-align: top;
+	letter-spacing: 0.81px;
+	font-size: 18px;
+	line-height: 24px;
+}
+
+.serv__ip {
+	color: #757575;
+	letter-spacing: 0.72px;
+	font-size: 16px;
+	line-height: 24px;
+}
+
+.serv__gpu {
+	margin: 20px;
+	margin-top: 0px;
+	padding: 20px;
+	padding-bottom: 0;
+	border-radius: 2px;
+	background: #FFF;
+	box-shadow: 0px 1px 2px 0px rgba(0,0,0,0.07);
+}
+
+.serv__grid-3 {
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	-ms-flex-align: stretch;
+	margin-left: -20px;
+
+	-webkit-flex-wrap: wrap;
+	-ms-flex-wrap: wrap;
+	flex-wrap: wrap;
+	-webkit-box-align: stretch;
+	-webkit-align-items: stretch;
+	align-items: stretch;
+}
+
+.serv__grid-3 > * {
+	display: block;
+	margin-bottom: 20px;
+	margin-left: 20px;
+	min-width: 230px;
+	width: calc(100% * 1 / 3 - 20px);
+
+	-webkit-box-flex: 0;
+	-webkit-flex: 0 0 auto;
+	-ms-flex: 0 0 auto;
+	flex: 0 0 auto;
+}
+
+.serv__mod {
+	position: relative;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	-ms-flex-pack: justify;
+	-ms-flex-align: center;
+	overflow:hidden;
+	padding: 11px 20px 12px 23px;
+	border-radius: 2px;
+	background: #FFF;
+	box-shadow: 0px 1px 2px 0px rgba(0,0,0,0.15);
+
+	-webkit-box-pack: justify;
+	-webkit-justify-content: space-between;
+	justify-content: space-between;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	align-items: center;
+}
+
+[class*="serv__modLabel--"]:before {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 3px;
+	height: 100%;
+	content: "";
+}
+
+.serv__modLabel--green:before {
+	background-color: #68B665;
+}
+
+.serv__modLabel--yellow:before {
+	background-color: #FCBE32;
+}
+
+.serv__modLabel--red:before {
+	background-color: #FF5F2E;
+}
+
+.serv__modLabel {
+	color: #282828;
+	text-align: right;
+	letter-spacing: 0.9px;
+	font-size: 20px;
+	line-height: 30px;
+}
+
+.serv__modSublabel {
+	color: #5D5D5D;
+	letter-spacing: 0.72px;
+	font-size: 16px;
+	line-height: 22px;
+}
+
+.serv__modNumber {
+	color: #282828;
+	text-align: right;
+	letter-spacing: 1.57px;
+	font-weight: bold;
+	font-size: 35px;
+}
+
+.serv__modUnit {
+	color: #282828;
+	vertical-align: bottom;
+	letter-spacing: 0.9px;
+	font-weight: normal;
+	font-size: 20px;
+}
+
+.serv__modSubnumbler {
+	color: #5D5D5D;
+	letter-spacing: 0.72px;
+	font-weight: normal;
+	font-size: 16px;
+}
