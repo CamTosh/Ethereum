@@ -3,68 +3,226 @@
 <head>
 	<meta charset="utf-8">
 	<title>GPU Info</title>
-	<link rel="stylesheet" type="text/css" href="main.css">
+	<link rel="stylesheet" type="text/css" href="css/reset.css">
+	<link rel="stylesheet" type="text/css" href="css/design.css">
 </head>
 <body>
 
-	<div class="container">
-	
-		<div class="stock server">
-			<span class="symbol serverName"></span>		
-			<span class="change serverIp"></span>		
+	<header class="header">
+		<div class="container">
+			<div class="header__serv">
+				<h1 class="header__servName">Main server</h1>
+				<div class="header__servIp">172.16.254.1</div>
+			</div>
+			<div class="header__stat">
+				<h2 class="header__statName">Gain</h2>
+				<div>
+					<div>
+						<span class="header__statNumber">4269426942</span>
+						<span class="header__statUnit"> eth</span>
+					</div>
+					<div>
+						<span class="header__statNumber">541.38</span>
+						<span class="header__statUnit"> &euro;</span>
+					</div>
+				</div>
+			</div>
+			<div class="header__stat">
+				<h2 class="header__statName">Hash</h2>
+				<div>
+					<span class="header__statNumber">127810954</span>
+					<span class="header__statUnit">mH/s</span>
+				</div>
+			</div>
 		</div>
+	</header>
 
-		<div class="stock gain">
-			<span class="symbol">Gain</span>
-			<span class="change gainvalue"></span>
-			<span class="valeur eurvalue"></span>
-		</div>
+	<main>
+		<div class="container">
+			<section class="serv">
+				<header class="serv__head">
+					<div>
+						<span class="serv__status serv__status--up">
+							&#9679;
+						</span>
+						<h3 class="serv__name">My server</h3>
+					</div>
+					<div class="serv__ip">192.168.255.255</div>
+				</header>
+				<article class="serv__gpu">
+					<div class="serv__grid-3">
+						<div class="serv__mod">
+							<div class="serv__modLabel serv__modLabel--red">
+								Load
+							</div>
+							<div class="serv__modNumber">
+								100<label class="serv__modUnit">%</label>
+							</div>
+						</div>
 
-		<div class="stock hash">
-			<span class="symbol">Hash</span>
-			<span class="change hashvalue"></span>
-		</div>
-		
-		<div class="stock load">
-			<span class="symbol">Load</span>
-			<span class="change loadvalue"></span>
-		</div>
+						<div class="serv__mod">
+							<div class="serv__modLabel serv__modLabel--green">
+								Heat
+							</div>
+							<div class="serv__modNumber">
+								65<label class="serv__modUnit">&deg;C</label>
+							</div>
+						</div>
 
-		<div class="stock fan">
-			<span class="symbol">Fan</span>
-			<span class="change fanvalue"></span>
-		</div>
-		
-		
-		<div class="stock heat">
-			<span class="symbol">Heat</span>
-			<span class="change heatvalue"></span>
-		</div>	
+						<div class="serv__mod">
+							<div class="serv__modLabel serv__modLabel--yellow">
+								Fan
+							</div>
+							<div class="serv__modNumber">
+								100<label class="serv__modUnit">%</label>
+							</div>
+						</div>
 
-		<div class="stock clock">
-			<span class="symbol">Clock</span>
-			<span class="change clockvalue"></span>
-		</div>	
-		<!-- 
+						<div class="serv__mod">
+							<div class="serv__modLabel serv__modLabel--red">
+								Load
+								<div class="serv__modSublabel">Max</div>
+							</div>
+							<div class="serv__modNumber">
+								100<label class="serv__modUnit">%</label>
+								<div class="serv__modSubnumbler">1300 mHz</div>
+							</div>
+						</div>
 
-		<div class="stock maxClock">
-			<span class="symbol">Max clock (mHz)</span>
-			<span class="change maxClockvalue"></span>
+						<div class="serv__mod">
+							<div class="serv__modLabel serv__modLabel--red">
+								Load
+								<div class="serv__modSublabel">Max</div>
+							</div>
+							<div class="serv__modNumber">
+								100<label class="serv__modUnit">%</label>
+								<div class="serv__modSubnumbler">1300 mHz</div>
+							</div>
+						</div>
+					</div>
+				</article>
+
+				<article class="serv__gpu">
+					<div class="serv__grid-3">
+						<div class="serv__mod">
+							<div class="serv__modLabel serv__modLabel--red">
+								Load
+							</div>
+							<div class="serv__modNumber">
+								100<label class="serv__modUnit">%</label>
+							</div>
+						</div>
+
+						<div class="serv__mod">
+							<div class="serv__modLabel serv__modLabel--green">
+								Heat
+							</div>
+							<div class="serv__modNumber">
+								65<label class="serv__modUnit">&deg;C</label>
+							</div>
+						</div>
+
+						<div class="serv__mod">
+							<div class="serv__modLabel serv__modLabel--yellow">
+								Fan
+							</div>
+							<div class="serv__modNumber">
+								100<label class="serv__modUnit">%</label>
+							</div>
+						</div>
+
+						<div class="serv__mod">
+							<div class="serv__modLabel serv__modLabel--red">
+								Load
+								<div class="serv__modSublabel">Max</div>
+							</div>
+							<div class="serv__modNumber">
+								100<label class="serv__modUnit">%</label>
+								<div class="serv__modSubnumbler">1300 mHz</div>
+							</div>
+						</div>
+
+						<div class="serv__mod">
+							<div class="serv__modLabel serv__modLabel--red">
+								Load
+								<div class="serv__modSublabel">Max</div>
+							</div>
+							<div class="serv__modNumber">
+								100<label class="serv__modUnit">%</label>
+								<div class="serv__modSubnumbler">1300 mHz</div>
+							</div>
+						</div>
+					</div>
+				</article>
+			</section>
+
+			<section class="serv">
+				<header class="serv__head">
+					<div>
+						<span class="serv__status serv__status--down">
+							&#9679;
+						</span>
+						<h3 class="serv__name">My server 2</h3>
+					</div>
+					<div class="serv__ip">192.168.255.255</div>
+				</header>
+				<article class="serv__gpu">
+					<div class="serv__grid-3">
+						<div class="serv__mod">
+							<div class="serv__modLabel serv__modLabel--red">
+								Load
+							</div>
+							<div class="serv__modNumber">
+								0<label class="serv__modUnit">%</label>
+							</div>
+						</div>
+
+						<div class="serv__mod">
+							<div class="serv__modLabel serv__modLabel--green">
+								Heat
+							</div>
+							<div class="serv__modNumber">
+								0<label class="serv__modUnit">&deg;C</label>
+							</div>
+						</div>
+
+						<div class="serv__mod">
+							<div class="serv__modLabel serv__modLabel--yellow">
+								Fan
+							</div>
+							<div class="serv__modNumber">
+								0<label class="serv__modUnit">%</label>
+							</div>
+						</div>
+
+						<div class="serv__mod">
+							<div class="serv__modLabel serv__modLabel--red">
+								Load
+								<div class="serv__modSublabel">Max</div>
+							</div>
+							<div class="serv__modNumber">
+								0<label class="serv__modUnit">%</label>
+								<div class="serv__modSubnumbler">0 mHz</div>
+							</div>
+						</div>
+
+						<div class="serv__mod">
+							<div class="serv__modLabel serv__modLabel--red">
+								Load
+								<div class="serv__modSublabel">Max</div>
+							</div>
+							<div class="serv__modNumber">
+								0<label class="serv__modUnit">%</label>
+								<div class="serv__modSubnumbler">0 mHz</div>
+							</div>
+						</div>
+					</div>
+				</article>
+			</section>
 		</div>
-		-->
-		<div class="stock memory">
-			<span class="symbol">Memory</span>
-			<span class="change memvalue"></span>
-		</div>
-		<!-- 
-		<div class="stock maxMemory">
-			<span class="symbol">Max memory (mHz)</span>
-			<span class="change maxMemValue"></span>
-		</div>
-		-->
-	</div>
+	</main>
 
 </body>
-	<script src="jquery-2.2.4.min.js"></script>
-	<script src="script.js"></script>
+<script src="js/jquery-2.2.4.min.js"></script>
+<script src="js/script.js"></script>
 </html>
