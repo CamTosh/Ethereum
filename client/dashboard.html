@@ -9,20 +9,20 @@
 <body>
 
 	<header class="header">
-		<div class="container">
+		<div class="container" ng-repeat="i in infos">
 			<div class="header__serv">
-				<h1 class="header__servName">Main server</h1>
-				<div class="header__servIp">172.16.254.1</div>
+				<h1 class="header__servName">{{ i.Name}}</h1>
+				<div class="header__servIp">{{ i.Ip }}</div>
 			</div>
 			<div class="header__stat">
 				<h2 class="header__statName">Gain</h2>
 				<div>
 					<div>
-						<span class="header__statNumber">4269426942</span>
+						<span class="header__statNumber">{{ i.Balance }}</span>
 						<span class="header__statUnit"> eth</span>
 					</div>
 					<div>
-						<span class="header__statNumber">541.38</span>
+						<span class="header__statNumber">{{ i.Euro }}</span>
 						<span class="header__statUnit"> &euro;</span>
 					</div>
 				</div>
@@ -30,7 +30,7 @@
 			<div class="header__stat">
 				<h2 class="header__statName">Hash</h2>
 				<div>
-					<span class="header__statNumber">127810954</span>
+					<span class="header__statNumber">{{ i.Hash }}</span>
 					<span class="header__statUnit">mH/s</span>
 				</div>
 			</div>
@@ -45,7 +45,7 @@
 						<span class="serv__status serv__status--up">
 							&#9679;
 						</span>
-						<td class="serv__name" id="serv_name">{{ i.Name }}</td>
+						<h3 class="serv__name" id="serv_name">{{ i.Name }}</h3>
 					</div>
 					<div class="serv__ip" id="serv_ip">{{ i.Ip }}</div>
 				</header>
