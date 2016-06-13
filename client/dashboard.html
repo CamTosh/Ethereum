@@ -38,16 +38,16 @@
 	</header>
 
 	<main>
-		<div class="container">
-			<section class="serv">
+		<div class="container" ng-app="gpu" ng-controller="ctrl">
+			<section class="serv" ng-repeat="x in names">
 				<header class="serv__head">
 					<div>
 						<span class="serv__status serv__status--up">
 							&#9679;
 						</span>
-						<h3 class="serv__name" id="serv_name">My server</h3>
+						<td class="serv__name" id="serv_name">{{ x.Name }}</td>
 					</div>
-					<div class="serv__ip" id="serv_ip">192.168.255.255</div>
+					<div class="serv__ip" id="serv_ip">{{ x.Ip }}</div>
 				</header>
 				<article class="serv__gpu">
 					<div class="serv__grid-3">
@@ -56,6 +56,7 @@
 								Load
 							</div>
 							<div class="serv__modNumber" id="serv_load">
+								 {{ x.Load }}
 								<label class="serv__modUnit">%</label>
 							</div>
 						</div>
@@ -65,6 +66,7 @@
 								Heat
 							</div>
 							<div class="serv__modNumber" id="serv_heat">
+								 {{ x.Heat }}
 								<label class="serv__modUnit">&deg;C</label>
 							</div>
 						</div>
@@ -74,6 +76,7 @@
 								Fan
 							</div>
 							<div class="serv__modNumber" id="serv_fan">
+								 {{ x.FanSpeed }}
 								<label class="serv__modUnit">%</label>
 							</div>
 						</div>
@@ -84,10 +87,10 @@
 								<div class="serv__modSublabel">Max</div>
 							</div>
 							<div class="serv__modNumber">
-								<span id="serv_clock"></span>
+								{{ (x.CurrentClock / x.MaxClock * 100).toFixed(2) }}
 								<label class="serv__modUnit">%</label>
 								<div class="serv__modSubnumbler">
-									<span id="serv_maxclock"></span>mHz
+									{{ x.MaxClock }}mHz
 								</div>
 							</div>
 						</div>
@@ -98,10 +101,11 @@
 								<div class="serv__modSublabel">Max</div>
 							</div>
 							<div class="serv__modNumber">
+								{{ (x.CurrentMem / x.MaxMem * 100).toFixed(2) }}
 								<span id="serv_mem"></span>
 								<label class="serv__modUnit">%</label>
 								<div class="serv__modSubnumbler">
-									<span id="serv_maxmem"></span>mHz
+									<span id="serv_maxmem"></span>{{ x.MaxMem }}mHz
 								</div>
 							</div>
 						</div>
@@ -110,8 +114,7 @@
 			</section>
 		</div>
 	</main>
-
 </body>
-<script src="js/jquery-2.2.4.min.js"></script>
-<script src="js/script.js"></script>
+<script src="js/angular.min.js"></script>
+<script src="js/angular.js"></script>
 </html>

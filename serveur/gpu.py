@@ -157,8 +157,12 @@ def dico():
 	d['MaxMem'] = str(g.getMaxClock("mem"))
 	d['CurrentMem'] = g.getCurrentClock("mem")
 	d['Information'] = str(g.getInformation("odgc"))
-
-	return d
+	
+	s = {}
+	l = []
+	l.append(d)
+	s['data'] = l
+	return s
 
 
 @route('/', method='get')
