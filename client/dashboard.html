@@ -39,15 +39,15 @@
 
 	<main>
 		<div class="container" ng-app="gpu" ng-controller="ctrl">
-			<section class="serv" ng-repeat="x in names">
+			<section class="serv" ng-repeat="i in infos">
 				<header class="serv__head">
 					<div>
 						<span class="serv__status serv__status--up">
 							&#9679;
 						</span>
-						<td class="serv__name" id="serv_name">{{ x.Name }}</td>
+						<td class="serv__name" id="serv_name">{{ i.Name }}</td>
 					</div>
-					<div class="serv__ip" id="serv_ip">{{ x.Ip }}</div>
+					<div class="serv__ip" id="serv_ip">{{ i.Ip }}</div>
 				</header>
 				<article class="serv__gpu">
 					<div class="serv__grid-3">
@@ -56,7 +56,7 @@
 								Load
 							</div>
 							<div class="serv__modNumber" id="serv_load">
-								 {{ x.Load }}
+								 {{ i.Load }}
 								<label class="serv__modUnit">%</label>
 							</div>
 						</div>
@@ -66,7 +66,7 @@
 								Heat
 							</div>
 							<div class="serv__modNumber" id="serv_heat">
-								 {{ x.Heat }}
+								 {{ i.Heat }}
 								<label class="serv__modUnit">&deg;C</label>
 							</div>
 						</div>
@@ -76,7 +76,7 @@
 								Fan
 							</div>
 							<div class="serv__modNumber" id="serv_fan">
-								 {{ x.FanSpeed }}
+								 {{ i.FanSpeed }}
 								<label class="serv__modUnit">%</label>
 							</div>
 						</div>
@@ -87,10 +87,10 @@
 								<div class="serv__modSublabel">Max</div>
 							</div>
 							<div class="serv__modNumber">
-								{{ (x.CurrentClock / x.MaxClock * 100).toFixed(2) }}
+								{{ (i.CurrentClock / i.MaxClock * 100).toFixed(2) }}
 								<label class="serv__modUnit">%</label>
 								<div class="serv__modSubnumbler">
-									{{ x.MaxClock }}mHz
+									{{ i.MaxClock }}mHz
 								</div>
 							</div>
 						</div>
@@ -101,11 +101,11 @@
 								<div class="serv__modSublabel">Max</div>
 							</div>
 							<div class="serv__modNumber">
-								{{ (x.CurrentMem / x.MaxMem * 100).toFixed(2) }}
+								{{ (i.CurrentMem / i.MaxMem * 100).toFixed(2) }}
 								<span id="serv_mem"></span>
 								<label class="serv__modUnit">%</label>
 								<div class="serv__modSubnumbler">
-									<span id="serv_maxmem"></span>{{ x.MaxMem }}mHz
+									<span id="serv_maxmem"></span>{{ i.MaxMem }}mHz
 								</div>
 							</div>
 						</div>
