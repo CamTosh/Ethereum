@@ -45,9 +45,9 @@
 						<span class="serv__status serv__status--up">
 							&#9679;
 						</span>
-						<h3 class="serv__name">My server</h3>
+						<h3 class="serv__name" id="serv_name">My server</h3>
 					</div>
-					<div class="serv__ip">192.168.255.255</div>
+					<div class="serv__ip" id="serv_ip">192.168.255.255</div>
 				</header>
 				<article class="serv__gpu">
 					<div class="serv__grid-3">
@@ -55,8 +55,8 @@
 							<div class="serv__modLabel serv__modLabel--red">
 								Load
 							</div>
-							<div class="serv__modNumber">
-								100<label class="serv__modUnit">%</label>
+							<div class="serv__modNumber" id="serv_load">
+								<label class="serv__modUnit">%</label>
 							</div>
 						</div>
 
@@ -64,8 +64,8 @@
 							<div class="serv__modLabel serv__modLabel--green">
 								Heat
 							</div>
-							<div class="serv__modNumber">
-								65<label class="serv__modUnit">&deg;C</label>
+							<div class="serv__modNumber" id="serv_heat">
+								<label class="serv__modUnit">&deg;C</label>
 							</div>
 						</div>
 
@@ -73,147 +73,36 @@
 							<div class="serv__modLabel serv__modLabel--yellow">
 								Fan
 							</div>
-							<div class="serv__modNumber">
-								100<label class="serv__modUnit">%</label>
+							<div class="serv__modNumber" id="serv_fan">
+								<label class="serv__modUnit">%</label>
 							</div>
 						</div>
 
 						<div class="serv__mod">
 							<div class="serv__modLabel serv__modLabel--red">
-								Load
+								Clock
 								<div class="serv__modSublabel">Max</div>
 							</div>
 							<div class="serv__modNumber">
-								100<label class="serv__modUnit">%</label>
-								<div class="serv__modSubnumbler">1300 mHz</div>
+								<span id="serv_clock"></span>
+								<label class="serv__modUnit">%</label>
+								<div class="serv__modSubnumbler">
+									<span id="serv_maxclock"></span>mHz
+								</div>
 							</div>
 						</div>
 
 						<div class="serv__mod">
 							<div class="serv__modLabel serv__modLabel--red">
-								Load
+								Mem
 								<div class="serv__modSublabel">Max</div>
 							</div>
 							<div class="serv__modNumber">
-								100<label class="serv__modUnit">%</label>
-								<div class="serv__modSubnumbler">1300 mHz</div>
-							</div>
-						</div>
-					</div>
-				</article>
-
-				<article class="serv__gpu">
-					<div class="serv__grid-3">
-						<div class="serv__mod">
-							<div class="serv__modLabel serv__modLabel--red">
-								Load
-							</div>
-							<div class="serv__modNumber">
-								100<label class="serv__modUnit">%</label>
-							</div>
-						</div>
-
-						<div class="serv__mod">
-							<div class="serv__modLabel serv__modLabel--green">
-								Heat
-							</div>
-							<div class="serv__modNumber">
-								65<label class="serv__modUnit">&deg;C</label>
-							</div>
-						</div>
-
-						<div class="serv__mod">
-							<div class="serv__modLabel serv__modLabel--yellow">
-								Fan
-							</div>
-							<div class="serv__modNumber">
-								100<label class="serv__modUnit">%</label>
-							</div>
-						</div>
-
-						<div class="serv__mod">
-							<div class="serv__modLabel serv__modLabel--red">
-								Load
-								<div class="serv__modSublabel">Max</div>
-							</div>
-							<div class="serv__modNumber">
-								100<label class="serv__modUnit">%</label>
-								<div class="serv__modSubnumbler">1300 mHz</div>
-							</div>
-						</div>
-
-						<div class="serv__mod">
-							<div class="serv__modLabel serv__modLabel--red">
-								Load
-								<div class="serv__modSublabel">Max</div>
-							</div>
-							<div class="serv__modNumber">
-								100<label class="serv__modUnit">%</label>
-								<div class="serv__modSubnumbler">1300 mHz</div>
-							</div>
-						</div>
-					</div>
-				</article>
-			</section>
-
-			<section class="serv">
-				<header class="serv__head">
-					<div>
-						<span class="serv__status serv__status--down">
-							&#9679;
-						</span>
-						<h3 class="serv__name">My server 2</h3>
-					</div>
-					<div class="serv__ip">192.168.255.255</div>
-				</header>
-				<article class="serv__gpu">
-					<div class="serv__grid-3">
-						<div class="serv__mod">
-							<div class="serv__modLabel serv__modLabel--red">
-								Load
-							</div>
-							<div class="serv__modNumber">
-								0<label class="serv__modUnit">%</label>
-							</div>
-						</div>
-
-						<div class="serv__mod">
-							<div class="serv__modLabel serv__modLabel--green">
-								Heat
-							</div>
-							<div class="serv__modNumber">
-								0<label class="serv__modUnit">&deg;C</label>
-							</div>
-						</div>
-
-						<div class="serv__mod">
-							<div class="serv__modLabel serv__modLabel--yellow">
-								Fan
-							</div>
-							<div class="serv__modNumber">
-								0<label class="serv__modUnit">%</label>
-							</div>
-						</div>
-
-						<div class="serv__mod">
-							<div class="serv__modLabel serv__modLabel--red">
-								Load
-								<div class="serv__modSublabel">Max</div>
-							</div>
-							<div class="serv__modNumber">
-								0<label class="serv__modUnit">%</label>
-								<div class="serv__modSubnumbler">0 mHz</div>
-							</div>
-						</div>
-
-						<div class="serv__mod">
-							<div class="serv__modLabel serv__modLabel--red">
-								Load
-								<div class="serv__modSublabel">Max</div>
-							</div>
-							<div class="serv__modNumber">
-								0<label class="serv__modUnit">%</label>
-								<div class="serv__modSubnumbler">0 mHz</div>
+								<span id="serv_mem"></span>
+								<label class="serv__modUnit">%</label>
+								<div class="serv__modSubnumbler">
+									<span id="serv_maxmem"></span>mHz
+								</div>
 							</div>
 						</div>
 					</div>

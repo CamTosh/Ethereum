@@ -63,25 +63,27 @@ function repeatMe(){
 		timeout: 1000,
 		success: function(data) {
 
-			color_label();
+			//color_label();
 
 		  	r = data;
-			//$(".uptime").text(r.Uptime);
-		    $(".serverName").text(r.Name);
-		    $(".serverIp").text(r.Ip);
-		    $(".fanvalue").text(r.FanSpeed);
-			$(".loadvalue").text(r.Load);
-			$(".clockvalue").text(r.CurrentClock);
-			$(".memvalue").text(r.CurrentMem);
+		  	mem = r.CurrentMem / r.MaxMem * 100
+		  	clock = r.CurrentClock / r.MaxClock * 100
+			//$("uptime").text(r.Uptime);
+		    $("#serv_name").text(r.Name);
+		    $("#serv_ip").text(r.Ip);
+		    $("#serv_fan").text(r.FanSpeed);
+			$("#serv_load").text(r.Load);
+			$("#serv_clock").text(clock.toFixed(2));
+			$("#serv_mem").text(mem.toFixed(2));
+			$("#serv_maxclock").text(r.MaxClock);
+			$("#serv_maxmem").text(r.MaxMem);
+			$("#serv_heat").text(r.Heat );
 			/*
-			$(".maxClockvalue").text(r.MaxClock);
-			$(".maxMemValue").text(r.MaxMem);
-			*/
-			$(".heatvalue").text(r.Heat );
-			$(".hashvalue").text(r.Hash);
+			$("hashvalue").text(r.Hash);
 			s = r.Balance /1000000000000000000;
-			$(".gainvalue").text(s.toFixed(5));
-			$(".eurvalue").text(r.Euro );
+			$("gainvalue").text(s.toFixed(5));
+			$("eurvalue").text(r.Euro );
+			*/
 		},
 
 	});
