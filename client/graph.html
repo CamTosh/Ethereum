@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head>
+	<meta charset="utf-8">
+	<title>GPU Info</title>
+	<link rel="stylesheet" type="text/css" href="css/reset.css">
+	<link rel="stylesheet" type="text/css" href="css/design.css">
+    <link type="text/css" rel="stylesheet" href="http://pubnub.github.io/eon/v/eon/0.0.11/eon.css" />
+<body>
+
+	<header class="header" ng-controller="ctrl_master">
+		<div class="container" ng-repeat="i in infos">
+			<div class="header__serv">
+				<h1 class="header__servName">{{ i.Name}}</h1>
+				<div class="header__servIp">{{ i.Ip }}</div>
+			</div>
+			<div class="header__stat">
+				<h2 class="header__statName">Gain</h2>
+				<div>
+					<div>
+						<span class="header__statNumber">{{ i.Balance /1000000000000000000 }}</span>
+						<span class="header__statUnit"> eth</span>
+					</div>
+					<div>
+						<span class="header__statNumber">{{ i.Euro }}</span>
+						<span class="header__statUnit"> &euro;</span>
+					</div>
+				</div>
+			</div>
+			<div class="header__stat">
+				<h2 class="header__statName">Hash</h2>
+				<div>
+					<span class="header__statNumber">{{ (i.Hash / 10000000).toFixed(2) }}</span>
+					<span class="header__statUnit">TH/s</span>
+				</div>
+			</div>
+		</div>
+	</header>
+
+	<main>
+	<div class="container">
+			<section class="serv">
+				<header class="serv__head">
+					<div>
+						<h3 class="serv__name" id="serv_name">Kraken</h3>
+					</div>
+					<div class="serv__ip" id="serv_ip">Etheur</div>
+				</header>
+				<article class="serv__gpu">
+				<div id="kraken"></div>
+				</article>
+			</section>
+		</div>
+		<div class="container">
+			<section class="serv">
+				<header class="serv__head">
+					<div>
+						<h3 class="serv__name" id="serv_name">Hashrate</h3>
+					</div>
+					<div class="serv__ip" id="serv_ip">Th/s</div>
+				</header>
+				<article class="serv__gpu">
+					<div id="chart">
+					</div>
+				</article>
+			</section>
+		</div>
+		
+	</main>
+</body>
+
+<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+<script type="text/javascript" src="http://pubnub.github.io/eon/v/eon/0.0.11/eon.js"></script>
+<script type="text/javascript" src="https://cdn.cryptowat.ch/assets/build/scripts/dist/embed.js"></script>
+
+<script>
+var pubnub = PUBNUB.init({
+	publish_key: 'pub-c-923938f1-a4c1-4253-b15a-9c24087904c9',
+	subscribe_key: 'sub-c-bd9ab0d6-6e02-11e5-8d3b-0619f8945a4f'
+});
+var channel = "c3-spline" + Math.random();
+eon.chart({
+	channel: channel,
+	history: false,
+	flow: true,
+	pubnub: pubnub,
+	generate: {
+		bindto: '#chart',
+		data: {
+			type: 'spline',
+			labels: false
+		}
+	}
+});
+setInterval(function() {
+	var json = $.ajax({
+		url: '', // Url de l'api
+		dataType: 'json',
+		cache: false,
+		timeout: 10000,
+		success: function(data) {
+			pubnub.publish({
+				channel: channel,
+				message: {
+					eon: {
+						'Hashrate Th/s': (data.data[0].Hash / 10000000).toFixed(0)
+					}
+				}
+			});
+		}
+	});
+}, 10000);
+
+var chart = new cryptowatch.Embed('kraken', 'etheur', {
+	timePeriod: '1h',
+	height: 320,
+  customColorScheme: {
+    bg:           "303030",
+    text:         "b2b2b2",
+    textStrong:   "e5e5e5",
+    textWeak:     "7f7f7f",
+    short:        "FD4600",
+    shortFill:    "FF672C",
+    long:         "6290FF",
+    longFill:     "002782",
+    cta:          "363D52",
+    ctaHighlight: "414A67",
+    alert:        "FFD506",
+	}
+});
+chart.mount('#kraken');
+    </script>
+<script src="js/angular.min.js"></script>
+<script src="js/angular.js"></script>
+</html>
