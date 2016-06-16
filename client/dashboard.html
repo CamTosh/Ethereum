@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="app">
 <head>
 	<meta charset="utf-8">
 	<title>GPU Info</title>
@@ -8,7 +8,7 @@
 </head>
 <body>
 
-	<header class="header">
+	<header class="header" ng-controller="ctrl_master">
 		<div class="container" ng-repeat="i in infos">
 			<div class="header__serv">
 				<h1 class="header__servName">{{ i.Name}}</h1>
@@ -18,7 +18,7 @@
 				<h2 class="header__statName">Gain</h2>
 				<div>
 					<div>
-						<span class="header__statNumber">{{ i.Balance }}</span>
+						<span class="header__statNumber">{{ i.Balance /1000000000000000000 }}</span>
 						<span class="header__statUnit"> eth</span>
 					</div>
 					<div>
@@ -30,17 +30,17 @@
 			<div class="header__stat">
 				<h2 class="header__statName">Hash</h2>
 				<div>
-					<span class="header__statNumber">{{ i.Hash }}</span>
-					<span class="header__statUnit">mH/s</span>
+					<span class="header__statNumber">{{ (i.Hash / 10000000).toFixed(2) }}</span>
+					<span class="header__statUnit">TH/s</span>
 				</div>
 			</div>
 		</div>
 	</header>
 
 	<main>
-		<div class="container" ng-app="gpu" ng-controller="ctrl">
-			<section class="serv" ng-repeat="i in infos">
-				<header class="serv__head">
+		<div class="container">
+			<section class="serv" ng-controller="gpu0">
+				<header class="serv__head" ng-repeat="i in infos" ng-show="if(i != 0)">
 					<div>
 						<span class="serv__status serv__status--up">
 							&#9679;
@@ -49,14 +49,14 @@
 					</div>
 					<div class="serv__ip" id="serv_ip">{{ i.Ip }}</div>
 				</header>
-				<article class="serv__gpu">
+				<article class="serv__gpu" ng-repeat="g in infos.gpu">
 					<div class="serv__grid-3">
 						<div class="serv__mod">
 							<div class="serv__modLabel serv__modLabel--red">
 								Load
 							</div>
 							<div class="serv__modNumber" id="serv_load">
-								 {{ i.Load }}
+								 {{ g.Load }}
 								<label class="serv__modUnit">%</label>
 							</div>
 						</div>
@@ -66,7 +66,7 @@
 								Heat
 							</div>
 							<div class="serv__modNumber" id="serv_heat">
-								 {{ i.Heat }}
+								 {{ g.Heat }}
 								<label class="serv__modUnit">&deg;C</label>
 							</div>
 						</div>
@@ -76,7 +76,7 @@
 								Fan
 							</div>
 							<div class="serv__modNumber" id="serv_fan">
-								 {{ i.FanSpeed }}
+								 {{ g.FanSpeed }}
 								<label class="serv__modUnit">%</label>
 							</div>
 						</div>
@@ -87,10 +87,10 @@
 								<div class="serv__modSublabel">Max</div>
 							</div>
 							<div class="serv__modNumber">
-								{{ (i.CurrentClock / i.MaxClock * 100).toFixed(2) }}
+								{{ (g.CurrentClock / g.MaxClock * 100).toFixed(2) }}
 								<label class="serv__modUnit">%</label>
 								<div class="serv__modSubnumbler">
-									{{ i.MaxClock }}mHz
+									{{ g.MaxClock }}mHz
 								</div>
 							</div>
 						</div>
@@ -101,11 +101,11 @@
 								<div class="serv__modSublabel">Max</div>
 							</div>
 							<div class="serv__modNumber">
-								{{ (i.CurrentMem / i.MaxMem * 100).toFixed(2) }}
+								{{ (g.CurrentMem / g.MaxMem * 100).toFixed(2) }}
 								<span id="serv_mem"></span>
 								<label class="serv__modUnit">%</label>
 								<div class="serv__modSubnumbler">
-									<span id="serv_maxmem"></span>{{ i.MaxMem }}mHz
+									<span id="serv_maxmem"></span>{{ g.MaxMem }}mHz
 								</div>
 							</div>
 						</div>
