@@ -1,8 +1,10 @@
 # Ethereum Dashoard
 
+![Dashboard](panel.png)
+
 # Mémo
 
-Les serveurs tournent sur [Ubuntu 14.04](http://cdimage.ubuntu.com/netboot/14.04/), il faut activer le pilote graphique propriétaire d'ATI pour le bon fonctionnement.
+Les serveurs tournent sur [Ubuntu 14.04](http://cdimage.ubuntu.com/netboot/14.04/), il faut activer le pilote graphique propriétaire d'ATI pour le bon fonctionnement. Les cartes graphiques sont des r9 290.
 
 > Installation geth, ethereum et ethminer : 
 
