@@ -1,5 +1,12 @@
 # Ethereum Dashoard
 
+# Configuration
+
+La configuration se passe dans le fichier client/config.json.
+Il suffit de modifier, ajouter ou supprimer des IP. Pas besoin de spécifier le protocol HTTP mais il faut impérativement mettre le port. 
+
+Le/les serveurs dans ```Master``` sont pour Geth.py et ceux dans ```Worker``` pour Gpu.py. 
+
 # Mémo
 
 Les serveurs tournent sur [Ubuntu 14.04](http://cdimage.ubuntu.com/netboot/14.04/), il faut activer le pilote graphique propriétaire d'ATI pour le bon fonctionnement.
