@@ -1,5 +1,6 @@
 # Ethereum Dashoard
 
+<<<<<<< HEAD
 # Configuration
 
 La configuration se passe dans le fichier client/config.json.
@@ -7,9 +8,11 @@ Il suffit de modifier, ajouter ou supprimer des IP. Pas besoin de spécifier le 
 
 Le/les serveurs dans ```Master``` sont pour Geth.py et ceux dans ```Worker``` pour Gpu.py. 
 
+![Dashboard](panel.png)
+
 # Mémo
 
-Les serveurs tournent sur [Ubuntu 14.04](http://cdimage.ubuntu.com/netboot/14.04/), il faut activer le pilote graphique propriétaire d'ATI pour le bon fonctionnement.
+Les serveurs tournent sur [Ubuntu 14.04](http://cdimage.ubuntu.com/netboot/14.04/), il faut activer le pilote graphique propriétaire d'ATI pour le bon fonctionnement. Les cartes graphiques sont des r9 290.
 
 > Installation geth, ethereum et ethminer : 
 
@@ -36,7 +39,7 @@ L'argument ```--opencl-device``` (suivit d'un chiffre correspondant au numéro d
 Par exemple pour miner avec la seconde carte graphique :
 
 ```
-λ ethminer -G --opencl-device 1s --no-precompute -F ipDuServeurGeth:8008
+λ ethminer -G --opencl-device 1 --no-precompute -F ipDuServeurGeth:8008
 ```
 
 ## Overclock
@@ -56,7 +59,7 @@ Mes réglages pour l'overclocking des cartes graphiques :
 λ aticonfig --od-enable --adapter=all
 ```
 
-> Augmentation de la vitesse d'horloge à 1100) ainsi que la vitesse de la mémoire à 1400) sur toutes les cartes graphiques : 
+> Augmentation de la vitesse d'horloge à 1100 ainsi que la vitesse de la mémoire à 1400 sur toutes les cartes graphiques : 
 
 ```
 λ amdconfig --odsc=1100,1400 --adapter=all
