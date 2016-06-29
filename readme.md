@@ -1,6 +1,5 @@
 # Ethereum Dashoard
 
-<<<<<<< HEAD
 # Configuration
 
 La configuration se passe dans le fichier client/config.json.
