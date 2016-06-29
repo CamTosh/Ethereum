@@ -1,5 +1,4 @@
 #!/bin/env python
-from eth_rpc_client import Client
 from subprocess import check_output
 import locale
 import re
@@ -41,7 +40,6 @@ class GPUInfo(object):
 		info = self.getInformation("lsmod")
 		if "fglrx" in info:
 			return True
-		print("The 'fglrx' module is not currently loaded, or the AMD Catalyst software is not properly installed.")
 		sys.exit(1)
 
 
@@ -52,7 +50,6 @@ class GPUInfo(object):
 		try:
 			info = check_output(command)
 		except OSError:
-			print("The command '{0}' software cannot be found.".format(command[0]))
 			sys.exit(1)
 		
 		return info.decode(self.encoding)
@@ -67,9 +64,7 @@ class GPUInfo(object):
 				load_match = re.search(r"GPU load\D+(\d+)%", line)
 				if load_match:
 					return load_match.group(1)
-					print(load_match.group(1))
 			except IndexError:
-				print("Unable to parse output from the 'aticonfig' command.")
 				sys.exit(1)
 
 
@@ -80,14 +75,12 @@ class GPUInfo(object):
 			fan_match = re.search("(\d{1,3})%", info)
 			return fan_match.group(1)
 		except IndexError:
-			print("Unable to parse output from the 'aticonfig' command.")
 			sys.exit(1)
 
 
 	def getCurrentClock(self, gpu_or_mem, adapter=0):
 		
 		if gpu_or_mem not in self.gpu_mem_posit:
-			print("getCurrentClock only supports options 'gpu' or 'mem'.")
 			sys.exit(1)
 		info = self.getInformation("odgc").split("\n")
 		current_clock_regex = re.compile(r'Current Clocks\D+(\d+)\s+(\d+)')
@@ -101,7 +94,6 @@ class GPUInfo(object):
 	def getMaxClock(self, gpu_or_mem, adapter=0):
 		
 		if gpu_or_mem not in self.gpu_mem_posit:
-			print("getMaxClock only supports options 'gpu' or 'mem'.")
 			sys.exit(1)
 		info = self.getInformation("odgc", adapter).split("\n")
 		max_clock_regex = re.compile(r'Current Peak\D+(\d+)\s+(\d+)')
@@ -119,63 +111,7 @@ class GPUInfo(object):
 			temp_match = re.search(r'(\d{2,3})\.\d{2} C', info)
 			return temp_match.group(1)
 		except IndexError:
-			print("Could not parse temperature data.")
 			sys.exit(1)
-
-
-class RpcJson(object):
-
-	def __init__(self, ip, port):
-		self.ip = ip
-		self.port = port
-
-
-	def json (self, command, args = []):
-		payload = {
-			"method": command,
-			"params": args,
-			"jsonrpc": "2.0",
-			"id": 0,
-		}
-		r = requests.post('http://' + self.ip + ':' + str(self.port) + '/', data=json.dumps(payload), headers={'content-type': 'application/json'})
-		res = r.json()
-		return res['result']
-
-	def getEuroBalance(self):
-
-		r = requests.get("https://www.cryptocompare.com/api/data/price?fsym=ETH&tsyms=EUR")
-		res = r.json()
-
-		for i in res['Data']:
-			i['Price']
-
-		b = self.getBalance()
-
-		return str(b / 1000000000000000000 * i['Price'])[:5]
-
-	def getCoinbase(self):
-		# 10546208120000000000
-		c = self.json('eth_coinbase', 'ether')
-		return c
-
-
-	def getHashrate(self):
-
-		h = self.json('eth_hashrate')
-		return int(h, 16)
-
-
-	def getBalance(self):
-		c = self.getCoinbase()
-		l = (c, 'latest')
-		b = self.json('eth_getBalance', l)
-		return int(b, 16)
-
-
-	def getAccounts(self):
-
-		a = self.json('eth_getAccounts')
-		return a
 
 
 def get_uptime():
@@ -198,28 +134,44 @@ def get_ip():
 
 
 def dico():
-	d = {}
+	
+	grosTableau = {}
+	data = {}
+	gpu = []
+	gpu0 = {}
+	gpu1 = {}
+
+	g = GPUInfo()	
 	ip = get_ip()
-	g = GPUInfo()
-	r = RpcJson("localhost", 8008)
 
-	d['Uptime'] = get_uptime()
-	d['Hash'] = r.getHashrate()
-	d['Balance'] = r.getBalance()
-	d['Euro'] = r.getEuroBalance()
-	#d['Accounts'] = r.getAccounts()
-	d['Name'] = get_name()
-	d['Ip'] = get_ip()
-	d['Load'] = str(g.getLoad())
-	d['Heat'] = str(g.getTemperature())
-	d['FanSpeed'] = str(g.getFanspeed())	
-	d['MaxClock'] = str(g.getMaxClock("gpu"))
-	d['CurrentClock'] = g.getCurrentClock("gpu")
-	d['MaxMem'] = str(g.getMaxClock("mem"))
-	d['CurrentMem'] = g.getCurrentClock("mem")
-	d['Information'] = str(g.getInformation("odgc"))
+	data['Uptime'] = get_uptime()
+	data['Name'] = get_name()
+	data['Ip'] = get_ip()
+	
+	gpu0['Load'] = str(g.getLoad())
+	gpu0['Heat'] = str(g.getTemperature(adapter = 0))
+	gpu0['FanSpeed'] = str(g.getFanspeed(adapter = 0))	
+	gpu0['MaxClock'] = str(g.getMaxClock("gpu", adapter = 0))
+	gpu0['CurrentClock'] = g.getCurrentClock("gpu", adapter = 0)
+	gpu0['MaxMem'] = str(g.getMaxClock("mem", adapter = 0))
+	gpu0['CurrentMem'] = g.getCurrentClock("mem", adapter = 0)
+	gpu0['Information'] = str(g.getInformation("odgc", adapter = 0))
 
-	return d
+	gpu1['Load'] = str(g.getLoad())
+	gpu1['Heat'] = str(g.getTemperature(adapter = 1))
+	gpu1['FanSpeed'] = str(g.getFanspeed(adapter = 1))	
+	gpu1['MaxClock'] = str(g.getMaxClock("gpu", adapter = 1))
+	gpu1['CurrentClock'] = g.getCurrentClock("gpu", adapter = 1)
+	gpu1['MaxMem'] = str(g.getMaxClock("mem", adapter = 1))
+	gpu1['CurrentMem'] = g.getCurrentClock("mem", adapter = 1)
+	gpu1['Information'] = str(g.getInformation("odgc", adapter = 1))
+
+	gpu.append(gpu0)
+	gpu.append(gpu1)
+
+	data['gpu'] = gpu
+	grosTableau['data'] = data
+	return grosTableau
 
 
 @route('/', method='get')
@@ -233,7 +185,5 @@ def api():
 
 if __name__ == '__main__':
 
-	
 	ip = get_ip()
 	run(host=ip, port=6969)
-
