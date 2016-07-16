@@ -120,10 +120,10 @@
 							Clock
 							<div class="serv__modSublabel">Max</div>
 						</div>
-						<div class="serv__modNumber">
+						<div class="serv__modNumber" id="serv_clock">
 							{{ (g.CurrentClock / g.MaxClock * 100).toFixed(2) }}
 							<label class="serv__modUnit">%</label>
-							<div class="serv__modSubnumbler">
+							<div class="serv__modSubnumbler" id="serv_maxclock">
 								{{ g.MaxClock }}mHz
 							</div>
 						</div>
@@ -133,12 +133,12 @@
 							Mem
 							<div class="serv__modSublabel">Max</div>
 						</div>
-						<div class="serv__modNumber">
+						<div class="serv__modNumber" id="serv_mem">
 							{{ (g.CurrentMem / g.MaxMem * 100).toFixed(2) }}
 							<span id="serv_mem"></span>
 							<label class="serv__modUnit">%</label>
-							<div class="serv__modSubnumbler">
-								<span id="serv_maxmem"></span>{{ g.MaxMem }}mHz
+							<div class="serv__modSubnumbler" id="serv_maxmem">
+								{{ g.MaxMem }}mHz
 							</div>
 						</div>
 					</div>

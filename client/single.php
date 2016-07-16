@@ -5,17 +5,9 @@
 	<title>GPU Info</title>
 	<link rel="stylesheet" type="text/css" href="css/reset.css">
 	<link rel="stylesheet" type="text/css" href="css/design.css">
-	<link type="text/css" rel="stylesheet" href="css/graph.css">
-	<link type="text/css" rel="stylesheet" href="css/line.css">
 </head>
 <body>
-<script src="js/d3.v3.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
-<script src="js/rickshaw.js"></script>
-<script src="js/smothie.js"></script>
-
 <script src="js/angular.min.js"></script>
-
 <script type="text/javascript">
 	var app = angular.module('app', []);
 	console.log(<?= $rig ?>)
@@ -78,10 +70,10 @@
 							Clock
 							<div class="serv__modSublabel">Max</div>
 						</div>
-						<div class="serv__modNumber">
+						<div class="serv__modNumber" id="serv_clock">
 							{{ (g.CurrentClock / g.MaxClock * 100).toFixed(2) }}
 							<label class="serv__modUnit">%</label>
-							<div class="serv__modSubnumbler">
+							<div class="serv__modSubnumbler" id="serv_maxclock">
 								{{ g.MaxClock }}mHz
 							</div>
 						</div>
@@ -91,12 +83,12 @@
 							Mem
 							<div class="serv__modSublabel">Max</div>
 						</div>
-						<div class="serv__modNumber">
+						<div class="serv__modNumber" id="serv_mem">
 							{{ (g.CurrentMem / g.MaxMem * 100).toFixed(2) }}
 							<span id="serv_mem"></span>
 							<label class="serv__modUnit">%</label>
-							<div class="serv__modSubnumbler">
-								<span id="serv_maxmem"></span>{{ g.MaxMem }}mHz
+							<div class="serv__modSubnumbler" id="serv_maxmem">
+								{{ g.MaxMem }}mHz
 							</div>
 						</div>
 					</div>
