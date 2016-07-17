@@ -1,5 +1,10 @@
 # Ethereum Dashoard
 
+## Installation
+
+> You can use the [install.sh](https://github.com/CamTosh/Ethereum/blob/master/serveur/install.sh) for the installation of miner(s) and master(s) 
+
+
 # Configuration
 
 La configuration se passe dans le fichier client/config.json.
@@ -65,8 +70,6 @@ Mes réglages pour l'overclocking des cartes graphiques :
 ```
 
 **Attention, des erreurs peuvent survenir, à manipuler avec attention. Les capacitées d'overclockings peuvent varier suivant les cartes, l'alimentation ou encore la chaleur.**
-
-## Installation
 
 ### gpu.py
 
@@ -143,24 +146,6 @@ Exemple de retour de geth.py :
 	]
 }
 ```
-
-## Arboréscence
-
-- client/
-	- graph.html
-	- index.html
-	-css/
-		- design.css
-		- reset.css
-	- js/
-		- angular.min.js
-		- jquery-2.2.4.min.js
-		- script.js
-
-- serveur/
-	- geth.py
-	- gpu.py
-
 
 ## Méthodes
 
