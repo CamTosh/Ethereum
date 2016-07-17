@@ -14,12 +14,14 @@ echo ""
 
 case $OPTION in
 	1)
-		echo ""
-		echo "Ethereum & Ethminer"
-		echo ""
-		bash <(curl https://install-eth.ethereum.org -L)
-		apt-get install ethminer
-		
+		read -p "Do you want install Ethminer? [y/n]" ETH
+		if [ $ETH -eq "y"]; then
+			echo ""
+			echo "Ethereum & Ethminer"
+			echo ""
+			bash <(curl https://install-eth.ethereum.org -L)
+			apt-get install ethminer
+		fi
 		echo ""
 		echo "GPU API"
 		echo ""
@@ -57,12 +59,14 @@ case $OPTION in
 
 	;;
 	2)
-		echo ""
-		echo "Ethereum & Geth"
-		echo ""
-		bash <(curl https://install-geth.ethereum.org -L)
-		apt-get install ethminer
-
+		read -p "Do you want install Geth? [y/n]" GETH
+		if [ $GETH -eq "y"]; then
+			echo ""
+			echo "Ethereum & Geth"
+			echo ""
+			bash <(curl https://install-geth.ethereum.org -L)
+			apt-get install ethminer
+		fi
 		echo ""
 		echo "GETH API"
 		echo ""
