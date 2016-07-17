@@ -19,7 +19,7 @@ case $OPTION in
 			echo ""
 			echo "Ethereum & Ethminer"
 			echo ""
-			bash <(curl https://install-eth.ethereum.org -L)
+			curl https://install-eth.ethereum.org -L
 			apt-get install ethminer
 		fi
 		echo ""
@@ -50,8 +50,7 @@ case $OPTION in
 			echo "The Card(s) is/are overclocked"
 			echo "   Max clock : $MAXCLOCK"
 			echo "   Max mem : $MAXMEM"
-		fi
-		else 
+		else
 			echo ""
 			echo "It\'s great to stay calm"
 			echo ""
@@ -64,7 +63,7 @@ case $OPTION in
 			echo ""
 			echo "Ethereum & Geth"
 			echo ""
-			bash <(curl https://install-geth.ethereum.org -L)
+			curl https://install-geth.ethereum.org -L
 			apt-get install ethminer
 		fi
 		echo ""
