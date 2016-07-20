@@ -14,12 +14,13 @@ echo ""
 
 case $OPTION in
 	1)
-		read -p "Do you want install Ethminer? [y/n]" ETH
-		if [ $ETH -eq "y"]; then
+		read -p "Do you want install Ethminer? [y/n] " ETH
+		if [ $ETH = "y" ]; then
 			echo ""
 			echo "Ethereum & Ethminer"
 			echo ""
-			curl https://install-eth.ethereum.org -L
+			ETHCURL=$(curl https://install-eth.ethereum.org -L)
+			bash <$ETHCURL
 			apt-get install ethminer
 		fi
 		echo ""
@@ -34,7 +35,7 @@ case $OPTION in
 		echo ""
 		read -p "Do you want overclock GPU? [y/n]" OC
 
-		if [ $OC -eq "y"]; then
+		if [ $OC = "y" ]; then
 
 			aticonfig --od-enable --adapter=all
 			echo "Overclocking enable"
@@ -59,11 +60,12 @@ case $OPTION in
 	;;
 	2)
 		read -p "Do you want install Geth? [y/n]" GETH
-		if [ $GETH -eq "y"]; then
+		if [ $GETH = "y" ]; then
 			echo ""
 			echo "Ethereum & Geth"
 			echo ""
-			curl https://install-geth.ethereum.org -L
+			GETHCURL=$(curl https://install-geth.ethereum.org -L)
+			bash <$GETHCURL
 			apt-get install ethminer
 		fi
 		echo ""
