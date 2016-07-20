@@ -20,7 +20,7 @@ case $OPTION in
 			echo "Ethereum & Ethminer"
 			echo ""
 			ETHCURL=$(curl https://install-eth.ethereum.org -L)
-			bash < $ETHCURL
+			bash <$ETHCURL
 			apt-get install ethminer
 		fi
 		echo ""
@@ -65,7 +65,7 @@ case $OPTION in
 			echo "Ethereum & Geth"
 			echo ""
 			GETHCURL=$(curl https://install-geth.ethereum.org -L)
-			bash < $GETHCURL
+			bash <$GETHCURL
 			apt-get install ethminer
 		fi
 		echo ""
