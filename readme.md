@@ -14,6 +14,13 @@ Le/les serveurs dans ```Master``` sont pour Geth.py et ceux dans ```Worker``` po
 
 ![Dashboard](panel.png)
 
+# Buy me a :beer:
+
+Ethereum : 0xCb2E99dd7e1d5E184006654A162BbbD5A88dD206
+
+[Paypal](https://www.paypal.me/CamTosh)
+
+
 # Mémo
 
 Les serveurs tournent sur [Ubuntu 14.04](http://cdimage.ubuntu.com/netboot/14.04/), il faut activer le pilote graphique propriétaire d'ATI pour le bon fonctionnement. Les cartes graphiques sont des r9 290.
