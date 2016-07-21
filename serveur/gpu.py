@@ -213,17 +213,12 @@ def dico():
 	#gpu5['Information'] = str(g.getInformation("odgc", adapter = 5))
 
 	listeGPU = [gpu0, gpu1, gpu2, gpu3, gpu4, gpu5]
-	liste = []
-	r = 0
+	i = 0
 	result = g.get_adapter()
 	
-	for r <= result:
-		for lgpu in listeGPU:
-			liste.append(lgpu)
-		r += 1
-
-	for el in liste:
-		gpu.append(el)
+	while i <= n:
+		gpu.append(listeGPU[i])
+		i += 1
 
 	"""
 	gpu.append(gpu0)
@@ -235,6 +230,7 @@ def dico():
 	"""
 	data['gpu'] = gpu
 	grosTableau['data'] = data
+
 	return grosTableau
 
 
