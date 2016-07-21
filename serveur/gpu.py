@@ -140,6 +140,10 @@ def dico():
 	gpu = []
 	gpu0 = {}
 	gpu1 = {}
+	gpu2 = {}
+	gpu3 = {}
+	gpu4 = {}
+	gpu5 = {}
 
 	g = GPUInfo()	
 	ip = get_ip()
