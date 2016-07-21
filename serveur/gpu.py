@@ -24,8 +24,8 @@ class GPUInfo(object):
 	}
 
 	gpu_mem_posit = {
-		"gpu": 0,
-		"mem": 0,
+		"gpu": 1,
+		"mem": 2,
 	}
 
 
@@ -41,7 +41,6 @@ class GPUInfo(object):
 		if "fglrx" in info:
 			return True
 		sys.exit(1)
-
 
 	def getInformation(self, source, adapter=0):
 		
@@ -113,14 +112,21 @@ class GPUInfo(object):
 		except IndexError:
 			sys.exit(1)
 
+	def get_adapter(self):
+
+		s = check_output(["aticonfig", "—list-adapters"])
+		temp = re.findall(r'(Adapter)\s+(\d+)', s)
+
+		return temp[-1][-1]
+		
 
 def get_uptime():
 
 	with open('/proc/uptime', 'r') as f:
-	    uptime_seconds = float(f.readline().split()[0])
-	    uptime_string = str(timedelta(seconds = uptime_seconds))
+		uptime_seconds = float(f.readline().split()[0])
+		uptime_string = str(timedelta(seconds = uptime_seconds))
 
-	    return uptime_string
+		return uptime_string
 
 def get_name():
 	return socket.gethostname()
@@ -187,7 +193,7 @@ def dico():
 	gpu3['MaxMem'] = str(g.getMaxClock("mem", adapter = 3))
 	gpu3['CurrentMem'] = g.getCurrentClock("mem", adapter = 3)
 	#gpu3['Information'] = str(g.getInformation("odgc", adapter = 3))
-	"""
+	
 	gpu4['Load'] = str(g.getLoad())
 	gpu4['Heat'] = str(g.getTemperature(adapter = 4))
 	gpu4['FanSpeed'] = str(g.getFanspeed(adapter = 4))	
@@ -205,14 +211,28 @@ def dico():
 	gpu5['MaxMem'] = str(g.getMaxClock("mem", adapter = 5))
 	gpu5['CurrentMem'] = g.getCurrentClock("mem", adapter = 5)
 	#gpu5['Information'] = str(g.getInformation("odgc", adapter = 5))
+
+	listeGPU = [gpu0, gpu1, gpu2, gpu3, gpu4, gpu5]
+	liste = []
+	r = 0
+	result = g.get_adapter()
+	
+	for r <= result:
+		for lgpu in listeGPU:
+			liste.append(lgpu)
+		r += 1
+
+	for el in liste:
+		gpu.append(el)
+
 	"""
 	gpu.append(gpu0)
 	gpu.append(gpu1)
 	gpu.append(gpu2)
 	gpu.append(gpu3)
-	#gpu.append(gpu4)
-	#gpu.append(gpu5)
-
+	gpu.append(gpu4)
+	gpu.append(gpu5)
+	"""
 	data['gpu'] = gpu
 	grosTableau['data'] = data
 	return grosTableau
