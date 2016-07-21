@@ -24,8 +24,8 @@ class GPUInfo(object):
 	}
 
 	gpu_mem_posit = {
-		"gpu": 1,
-		"mem": 2,
+		"gpu": 0,
+		"mem": 0,
 	}
 
 
