@@ -187,7 +187,7 @@ def dico():
 	gpu3['MaxMem'] = str(g.getMaxClock("mem", adapter = 3))
 	gpu3['CurrentMem'] = g.getCurrentClock("mem", adapter = 3)
 	#gpu3['Information'] = str(g.getInformation("odgc", adapter = 3))
-
+	"""
 	gpu4['Load'] = str(g.getLoad())
 	gpu4['Heat'] = str(g.getTemperature(adapter = 4))
 	gpu4['FanSpeed'] = str(g.getFanspeed(adapter = 4))	
@@ -205,13 +205,13 @@ def dico():
 	gpu5['MaxMem'] = str(g.getMaxClock("mem", adapter = 5))
 	gpu5['CurrentMem'] = g.getCurrentClock("mem", adapter = 5)
 	#gpu5['Information'] = str(g.getInformation("odgc", adapter = 5))
-
+	"""
 	gpu.append(gpu0)
 	gpu.append(gpu1)
 	gpu.append(gpu2)
 	gpu.append(gpu3)
-	gpu.append(gpu4)
-	gpu.append(gpu5)
+	#gpu.append(gpu4)
+	#gpu.append(gpu5)
 
 	data['gpu'] = gpu
 	grosTableau['data'] = data
