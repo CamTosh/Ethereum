@@ -114,7 +114,7 @@ class GPUInfo(object):
 
 	def get_adapter(self):
 
-		s = check_output("aticonfig —list-adapters")
+		s = check_output("aticonfig --list-adapters")
 		temp = re.findall(r'(Adapter)\s+(\d+)', s)
 
 		return temp[-1][-1]
