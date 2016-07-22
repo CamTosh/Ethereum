@@ -114,10 +114,13 @@ class GPUInfo(object):
 
 	def get_adapter(self):
 
-		s = check_output("aticonfig --list-adapters")
-		temp = re.findall(r'(Adapter)\s+(\d+)', s)
+		s = check_output(["aticonfig", "--list-adapters"])
+		
+		for l in s.splitlines():
+			n = l[:2].replace(" ", "").replace("*", "")
+		
+		return int(n) 
 
-		return temp[-1][-1]
 		
 
 def get_uptime():
