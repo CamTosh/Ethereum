@@ -8,6 +8,7 @@
 </head>
 <body>
 <script src="js/angular.min.js"></script>
+<script src="js/jquery-2.2.4.min.js"></script>
 <script type="text/javascript">
 	var app = angular.module('app', []);
 </script>
@@ -68,50 +69,51 @@
 		<div class="container">
 		<?php
 
-		$data = $f->worker;
+		$data = $f->worker[0];
 
 		$i = 0;
 
 		foreach ($data as $d) {
+			foreach ($d as $m) {
 			?>
 			<section class="serv" ng-controller="gpu<?= $i ?>">
 			<header class="serv__head">
 				<div>
-					<span class="serv__status serv__status--up">
+					<span ng-class="isUp()">
 						&#9679;
 					</span>
 					<h3 class="serv__name" id="serv_name">
-						<a href="single.php?rig=<?= $i ?>" target="_blank">{{ infos.Name }}</a>
+					<a href="single.php?rig=<?= $i ?>" target="_blank">{{ infos.Name }}</a>  	
 					</h3>
 				</div>
-				<div class="serv__ip" id="serv_ip">{{ infos.Ip }}</div>
+				<div class="serv__ip">Baie : <?= $i ?> | <span id="serv_ip"> {{ infos.Ip }} </span></div>
 			</header>
 			<article class="serv__gpu" ng-repeat="g in infos.gpu">
 				<div class="serv__grid-3">
 					<div class="serv__mod">
-						<div class="serv__modLabel serv__modLabel--red">
+						<div ng-class="load()">
 							Load
 						</div>
-						<div class="serv__modNumber" id="serv_load">
-							 {{ g.Load }}
+						<div class="serv__modNumber">
+							<span id="load">{{ g.Load }}</span>
 							<label class="serv__modUnit">%</label>
 						</div>
 					</div>
 					<div class="serv__mod">
-						<div class="serv__modLabel serv__modLabel--green">
+						<div ng-class="heat()">
 							Heat
 						</div>
-						<div class="serv__modNumber" id="serv_heat">
-							 {{ g.Heat }}
+						<div class="serv__modNumber">
+							<span id="heat">{{ g.Heat }}</span>
 							<label class="serv__modUnit">&deg;C</label>
 						</div>
 					</div>
 					<div class="serv__mod">
-						<div class="serv__modLabel serv__modLabel--yellow">
+						<div ng-class="fan()">
 							Fan
 						</div>
-						<div class="serv__modNumber" id="serv_fan">
-							 {{ g.FanSpeed }}
+						<div class="serv__modNumber">
+							<span id="fan">{{ g.FanSpeed }}</span>
 							<label class="serv__modUnit">%</label>
 						</div>
 					</div>
@@ -148,16 +150,62 @@
 		<script type="text/javascript">
 
 			app.controller("gpu<?= $i ?>", function($scope, $http) {
-				var gpu = function gpuInfos() {
-				$http.get("http://<?= $d->ip ?>").then(function (response) {
-					$scope.infos = response.data.data;
-				});}
+			var gpu = function gpuInfos() {
+				$http.get("http://<?= $m ?>").then(function(response) {
+							$scope.infos = response.data.data;
+							$scope.isUp = function() {
+								if (response.data.data.Ip) {
+									return "serv__status serv__status--up";
+								}
+							}
+				
+							$scope.isUp = function() {
+								if (response.data.data.Ip) {
+									return "serv__status serv__status--up";
+								}
+							}
+				
+							$scope.load = function() {
+								v = $("#load").text().match(/\d+/)[0];
+								if (v <= 50) {
+									return ("serv__modLabel serv__modLabel--green");
+								} else if (v <= 80 && v > 50) {
+									return ("serv__modLabel serv__modLabel--yellow");
+								} else if (v >= 80) {
+									return ("serv__modLabel serv__modLabel--red");
+								}	
+							}
+				
+							$scope.heat = function() {
+								v = $("#heat").text().match(/\d+/)[0];
+								if (v <= 50) {
+									return ("serv__modLabel serv__modLabel--green");
+								} else if (v <= 80 && v > 50) {
+									return ("serv__modLabel serv__modLabel--yellow");
+								} else if (v >= 80) {
+									return ("serv__modLabel serv__modLabel--red");
+								}	
+							}
+				
+							$scope.fan = function() {
+								v = $("#fan").text().match(/\d+/)[0];
+								if (v <= 50) {
+									return ("serv__modLabel serv__modLabel--green");
+								} else if (v <= 80 && v > 50) {
+									return ("serv__modLabel serv__modLabel--yellow");
+								} else if (v >= 80) {
+									return ("serv__modLabel serv__modLabel--red");
+								}	
+							}
+						});
+					}
 				setInterval(gpu, 1000);
 			});
 
 		</script>
 		</section>
 		<?php
+			}
 			$i++;
 		}
 		?>
