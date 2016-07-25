@@ -36,7 +36,7 @@
 					</span>
 					<h3 class="serv__name" id="serv_name">{{ infos.Name }}</h3>
 				</div>
-				<div class="serv__ip">Baie : <?= $i ?> | <span id="serv_ip"> {{ infos.Ip }} </span></div>
+				<div class="serv__ip">Baie : <?= $baie ?> | <span id="serv_ip"> {{ infos.Ip }} </span></div>
 			</header>
 			<article class="serv__gpu" ng-repeat="g in infos.gpu">
 				<div class="serv__grid-3">
