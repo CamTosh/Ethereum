@@ -72,6 +72,7 @@
 		$data = $f->worker[0];
 
 		$i = 0;
+		$group = 0;
 
 		foreach ($data as $d) {
 			foreach ($d as $m) {
@@ -83,7 +84,7 @@
 						&#9679;
 					</span>
 					<h3 class="serv__name" id="serv_name">
-					<a href="single.php?rig=<?= $i ?>" target="_blank">{{ infos.Name }}</a>  	
+					<a href="single.php?group=<?= $group ?>&rig=<?= $i ?>" target="_blank">{{ infos.Name }}</a>  	
 					</h3>
 				</div>
 				<div class="serv__ip">Baie : <?= $i ?> | <span id="serv_ip"> {{ infos.Ip }} </span></div>
@@ -208,6 +209,7 @@
 			}
 			$i++;
 		}
+		$group++;
 		?>
 		</div>
 	</main>
