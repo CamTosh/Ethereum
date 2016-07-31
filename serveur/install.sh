@@ -23,14 +23,6 @@ case $OPTION in
 			bash <$ETHCURL
 			apt-get install -y ethminer
 		fi
-		read -p "Do you want install OpenSSh Server & X11VNC Server? [y/n] " OPSSH
-		if [ OPSSH = "y" ]; then
-			echo ""
-			echo "OpenSSH & X11VNC"
-			echo ""
-			apt-get install -y openssh-server
-			apt-get install -y x11vnc
-		fi
 		echo ""
 		echo "GPU API"
 		echo ""
@@ -88,5 +80,13 @@ case $OPTION in
 		echo ""
 	;;
 esac
+read -p "Do you want install OpenSSh Server & X11VNC Server? [y/n] " OPSSH
+	if [ OPSSH = "y" ]; then
+		echo ""
+		echo "OpenSSH & X11VNC"
+		echo ""
+		apt-get install -y openssh-server
+		apt-get install -y x11vnc
+	fi
 echo "For more information check the readme file (only in french)"
 exit 0;
