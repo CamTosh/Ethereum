@@ -21,7 +21,15 @@ case $OPTION in
 			echo ""
 			ETHCURL=$(curl https://install-eth.ethereum.org -L)
 			bash <$ETHCURL
-			apt-get install ethminer
+			apt-get install -y ethminer
+		fi
+		read -p "Do you want install OpenSSh Server & X11VNC Server? [y/n] " OPSSH
+		if [ OPSSH = "y" ]; then
+			echo ""
+			echo "OpenSSH & X11VNC"
+			echo ""
+			apt-get install -y openssh-server
+			apt-get install -y x11vnc
 		fi
 		echo ""
 		echo "GPU API"
@@ -66,7 +74,7 @@ case $OPTION in
 			echo ""
 			GETHCURL=$(curl https://install-geth.ethereum.org -L)
 			bash <$GETHCURL
-			apt-get install ethminer
+			apt-get install -y ethminer
 		fi
 		echo ""
 		echo "GETH API"
