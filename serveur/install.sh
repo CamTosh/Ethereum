@@ -90,8 +90,8 @@ case $OPTION in
 	;;
 esac
 
-read -p "Do you want install X11VNC Server? [y/n] " OPSSH
-if [ OPSSH = "y" ]; then
+read -p "Do you want install X11VNC Server? [y/n] " X11
+if [ X11 = "y" ]; then
 	if aptNotYetInstalled "x11vnc"; then
 		echo ""
 		echo "x11vnc"
