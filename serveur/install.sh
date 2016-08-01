@@ -12,6 +12,15 @@ echo ""
 read -p "Select an option [1-2]: " OPTION
 echo ""
 
+function aptNotYetInstalled() {
+
+  set +e;
+  return $(dpkg-query -W --showformat='${Status}\n' $1 2>/dev/null | grep -c "install ok installed");
+  set -e;
+
+}
+
+
 case $OPTION in
 	1)
 		read -p "Do you want install Ethminer? [y/n] " ETH
@@ -80,13 +89,17 @@ case $OPTION in
 		echo ""
 	;;
 esac
+
 read -p "Do you want install OpenSSh Server & X11VNC Server? [y/n] " OPSSH
 if [ OPSSH = "y" ]; then
-	echo ""
-	echo "OpenSSH & X11VNC"
-	echo ""
-	apt-get install -y openssh-server
-	apt-get install -y x11vnc
+	if aptNotYetInstalled "x11vnc"; then
+		echo ""
+		echo "x11vnc"
+		echo ""
+		apt-get install -y x11vnc
+	else
+		echo "Skipped x11 installation 'coz done already.";
+  	fi
 fi
 echo "For more information check the readme file (only in french)"
 exit 0;
