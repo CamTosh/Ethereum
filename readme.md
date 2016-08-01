@@ -168,11 +168,11 @@ Exemple de retour de geth.py :
 	- getMaxClock : retourne la vitesse maximale de la mémoire du GPU
 	- getCurrentClock : retourne la vitesse acutelle de la mémoire du GPU
 	- getInformation : retourne le résultat de la commande ```aticonfig --odgc```
+	- get_adapter : retourne le nombre de cartes graphiques que reconnait aticonfig.
 
 - get_uptime : retourne l'uptime
 - get_name : retourne l'hostname de la machine
-- get_ip : retourne l'ip de la machine
-
+- get_ip : retourne l'ip de la machine (eth0)
 
 > geth.py
 
