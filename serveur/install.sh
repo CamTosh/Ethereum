@@ -28,8 +28,8 @@ case $OPTION in
 			echo ""
 			echo "Ethereum & Ethminer"
 			echo ""
-			ETHCURL =$(curl https://raw.githubusercontent.com/ethereum/frontier-release/master/bin/install-cpp.sh -L)
-			bash <$ETHCURL
+			ETHCURL =$"<(curl https://raw.githubusercontent.com/ethereum/frontier-release/master/bin/install-cpp.sh -L)"
+			bash $ETHCURL
 			apt-get install -y ethminer
 		fi
 		echo ""
@@ -73,8 +73,8 @@ case $OPTION in
 			echo ""
 			echo "Ethereum & Geth"
 			echo ""
-			GETHCURL =$(curl https://raw.githubusercontent.com/ethereum/frontier-release/master/bin/install-go.sh -L)
-			bash <$GETHCURL
+			GETHCURL =$"<(curl https://raw.githubusercontent.com/ethereum/frontier-release/master/bin/install-go.sh -L)"
+			bash $GETHCURL
 			apt-get install -y ethminer
 		fi
 		echo ""
