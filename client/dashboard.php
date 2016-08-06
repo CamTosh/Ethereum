@@ -72,6 +72,7 @@
 		$data = $f->worker;
 
 		$i = 0;
+		$x = 0;
 		$group = 0;
 
 		foreach ($data as $d) {
@@ -87,7 +88,7 @@
 					<a href="single.php?group=<?= $group ?>&rig=<?= $i ?>" target="_blank">{{ infos.Name }}</a>  	
 					</h3>
 				</div>
-				<div class="serv__ip">Baie : <?= $i ?> | <span id="serv_ip"> {{ infos.Ip }} </span></div>
+				<div class="serv__ip">Baie : <?= $x ?> | <span id="serv_ip"> {{ infos.Ip }} </span></div>
 			</header>
 			<article class="serv__gpu" ng-repeat="g in gpu">
 				<div class="serv__grid-3">
@@ -204,9 +205,11 @@
 		<?php
 		$i++;
 			}
+				$x++;
 				$group++;		
-				$i = 0;
 		}
+		$i = 0;
+
 		?>
 		</div>
 	</main>
