@@ -10,23 +10,18 @@
 <script src="js/angular.min.js"></script>
 <script type="text/javascript">
 	var app = angular.module('app', []);
-	console.log(<?= $rig ?>)
 </script>
-
 	<main>
 		<div class="container">
 		<?php
-		// C'est crade mais fonctionnel
-		$baie = $_GET['goup'];
+		// C'est crade mais (enfin) fonctionnel
+		$baie = $_GET['group'];
 		$rig = $_GET['rig'];
 
 		$json_file = file_get_contents('config.json');
 		$f = json_decode($json_file);
 
 		$data = $f->worker;
-
-		foreach ($data[$baie] as $d) {
-			foreach ($d[$rig] as $r) {
 			?>
 			<section class="serv" ng-controller="gpu">
 			<header class="serv__head">
@@ -102,7 +97,7 @@
 
 			app.controller("gpu", function($scope, $http) {
 				var gpu = function gpuInfos() {
-				$http.get("http://<?= $r ?>").then(function (response) {
+				$http.get("http://<?= $data[$baie][$rig] ?>").then(function (response) {
 					$scope.infos = response.data.data;
 				});}
 				setInterval(gpu, 1000);
@@ -111,8 +106,6 @@
 		</script>
 
 		<?php
-			}
-		}
 		?>
 		</div>
 	</main>

@@ -13,7 +13,7 @@
 	var app = angular.module('app', []);
 </script>
 		<?php
-		// C'est crade mais fonctionnel
+		// C'est crade mais (enfin) fonctionnel
 		$json_file = file_get_contents('config.json');
 		$f = json_decode($json_file);
 
@@ -22,20 +22,20 @@
 		foreach ($dataH as $d) {
 			?>
 		<header class="header" ng-controller="ctrl_master<?= $s ?>">
-			<div class="container" ng-repeat="i in infos">
+			<div class="container">
 				<div class="header__serv">
 					<h1 class="header__servName"></h1>
-					<div class="header__servIp">{{ i.Ip }}</div>
+					<div class="header__servIp">{{ master.Ip }}</div>
 				</div>
 				<div class="header__stat">
 					<h2 class="header__statName">Gain</h2>
 					<div>
 						<div>
-							<span class="header__statNumber">{{ i.Balance /1000000000000000000 }}</span>
+							<span class="header__statNumber">{{ master.Balance /1000000000000000000 }}</span>
 							<span class="header__statUnit"> eth</span>
 						</div>
 						<div>
-							<span class="header__statNumber">{{ i.Euro }}</span>
+							<span class="header__statNumber">{{ master.Euro }}</span>
 							<span class="header__statUnit"> &euro;</span>
 						</div>
 					</div>
@@ -43,7 +43,7 @@
 				<div class="header__stat">
 					<h2 class="header__statName">Hash</h2>
 					<div>
-						<span class="header__statNumber">{{ (i.Hash / 1000000).toFixed(2) }}</span>
+						<span class="header__statNumber">{{ (master.Hash / 1000000).toFixed(2) }}</span>
 						<span class="header__statUnit">Mh/s</span>
 					</div>
 				</div>
@@ -52,7 +52,7 @@
 			app.controller('ctrl_master<?= $s ?>', function($scope, $http) {
 			var master = function gpuInfos() {
 			$http.get("http://<?= $d->ip ?>") .then(function (response) {
-				$scope.infos = response.data.data;
+				$scope.master = response.data;
 			});}
 			setInterval(master, 1000);
 		});
@@ -69,13 +69,13 @@
 		<div class="container">
 		<?php
 
-		$data = $f->worker[0];
+		$data = $f->worker;
 
 		$i = 0;
 		$group = 0;
 
 		foreach ($data as $d) {
-			foreach ($d as $m) {
+			foreach ((array) $d as $m) {
 			?>
 			<section class="serv" ng-controller="gpu<?= $i ?>">
 			<header class="serv__head">
@@ -89,7 +89,7 @@
 				</div>
 				<div class="serv__ip">Baie : <?= $i ?> | <span id="serv_ip"> {{ infos.Ip }} </span></div>
 			</header>
-			<article class="serv__gpu" ng-repeat="g in infos.gpu">
+			<article class="serv__gpu" ng-repeat="g in gpu">
 				<div class="serv__grid-3">
 					<div class="serv__mod">
 						<div ng-class="load()">
@@ -152,13 +152,9 @@
 
 			app.controller("gpu<?= $i ?>", function($scope, $http) {
 			var gpu = function gpuInfos() {
-				$http.get("http://<?= $m ?>").then(function(response) {
-							$scope.infos = response.data.data;
-							$scope.isUp = function() {
-								if (response.data.data.Ip) {
-									return "serv__status serv__status--up";
-								}
-							}
+				$http.get("http://<?= $m ?>") .then(function (response) {
+					$scope.infos = response.data.data;
+					$scope.gpu = response.data.data.gpu;
 				
 							$scope.isUp = function() {
 								if (response.data.data.Ip) {
@@ -206,10 +202,11 @@
 		</script>
 		</section>
 		<?php
+		$i++;
 			}
-			$i++;
+				$group++;		
+				$i = 0;
 		}
-		$group++;
 		?>
 		</div>
 	</main>
