@@ -16,9 +16,11 @@ Le/les serveurs dans ```Master``` sont pour Geth.py et ceux dans ```Worker``` po
 
 # Buy me a :beer:
 
+Vous aimez mon travail ? Vous utilisez mon travail sur votre infrastructure ? Vous avez des idées d'ajout, de modification ? Faites le moi savoir : ctoche@pulseheberg.com :)
+
 Ethereum : 0xCb2E99dd7e1d5E184006654A162BbbD5A88dD206
 
-[Paypal](https://www.paypal.me/CamTosh)
+[Paypal](https://www.paypal.me/CamTosh) 
 
 
 # Mémo
