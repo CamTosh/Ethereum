@@ -46,3 +46,9 @@ table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
+.message {
+	margin-left: 40%!IMPORTANT;
+	margin-right: 40%!IMPORTANT;
+	margin-bottom: 20px!IMPORTANT;
+	text-align: center!IMPORTANT;
+}
