@@ -1,3 +1,23 @@
+<?php
+
+function ping($url)  {  
+  
+    $ch = curl_init($url);  
+    curl_setopt($ch, CURLOPT_TIMEOUT, 5);  
+    curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 5);  
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);  
+    $data = curl_exec($ch);  
+    $httpcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);  
+    curl_close($ch);  
+
+    if($httpcode >= 200 && $httpcode < 300){  
+        return true;  
+        
+    } else {  
+        return false;  
+    }  
+}
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -55,7 +75,13 @@
 			<td>
 			<a href="single.php?group=<?= $i ?>&rig=<?= $r ?>" target="_blank">Single page</a>
 			</td>
-			<td class="positive">At work</td>
+			<?php
+				if (ping($k)) {
+					echo '<td class="positive">At work</td>';
+				} else {
+					echo '<td class="negative">Look\'s down</td>';
+				}
+			?>
 		</tr>
 		<?php
 				$r++;
@@ -97,7 +123,13 @@
 			<td>
 			<a href="single.php?group=<?= $i ?>&rig=<?= $r ?>" target="_blank">Single page</a>
 			</td>
-			<td class="positive">At work</td>
+			<?php
+				if (ping($k)) {
+					echo '<td class="positive">At work</td>';
+				} else {
+					echo '<td class="negative">Looks down</td>';
+				}
+			?>
 		</tr>
 		<?php
 				$r++;
