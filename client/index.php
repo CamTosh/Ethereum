@@ -11,7 +11,22 @@
 	<p>There is still in development but you can contribute : <a href="https://github.com/CamTosh/Ethereum/" target="_blank">Github</a></p>
 </div>
 <center>
-	<table class="ui orange table collapsing selectable celled table"">
+	<table class="ui orange table collapsing celled">
+		<tfoot class="full-width">
+			<tr>
+				<th>
+					Dashboard
+				</th>
+				<th>
+					<a href="list.php"><div class="ui right floated small labeled icon blue basic button"><i class="list layout icon"></i>List</div></a>
+				</th>
+				<th>
+					<a href="dashboard.php"><div class="ui right floated small labeled icon blue basic button"><i class="grid  layout icon"></i> Grid</div></a>
+				</th>
+			</tr>
+	  </tfoot>
+	</table>
+	<table class="ui green table collapsing selectable celled"">
 	<?php
 			
 			$file = file_get_contents("config.json");
@@ -51,8 +66,9 @@
 	<?php
 		}
 		?>
+
 	</table>
-	<table class="ui grey table collapsing selectable celled table"">
+	<table class="ui grey table collapsing selectable celled"">
 	<?php
 			
 			$file = file_get_contents("config.json");
@@ -92,14 +108,6 @@
 	<?php
 		}
 		?>
-		<tfoot class="full-width">
-			<tr>
-				<th></th>
-				<th colspan="3">
-					<a href="list.php"><div class="ui right floated small labeled icon blue basic button"><i class="dashboard icon"></i> Dashboard </div></a>
-				</th>
-			</tr>
-	  </tfoot>
 	</table>
 </center>
 </body>

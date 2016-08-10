@@ -45,6 +45,7 @@
 			$s++;
 		}
 	?>
+	<table class="ui striped grey selectable celled table very compact ">
 		<p class="right aligned">{{ infos.Name }}<p>
 		<p class="left aligned">{{ infos.Ip }}<p>
 		<thead>
