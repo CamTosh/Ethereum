@@ -12,8 +12,6 @@ Il suffit de modifier, ajouter ou supprimer des IP. Pas besoin de spécifier le 
 
 Le/les serveurs dans ```Master``` sont pour Geth.py et ceux dans ```Worker``` pour Gpu.py. 
 
-![Dashboard](panel.png)
-
 # Buy me a :beer:
 
 Vous aimez mon travail ? Vous utilisez mon travail sur votre infrastructure ? Vous avez des idées d'ajout, de modification ? Faites le moi savoir : ctoche@pulseheberg.com :)
@@ -21,6 +19,11 @@ Vous aimez mon travail ? Vous utilisez mon travail sur votre infrastructure ? Vo
 Ethereum : 0xCb2E99dd7e1d5E184006654A162BbbD5A88dD206
 
 [Paypal](https://www.paypal.me/CamTosh) 
+
+![Dashboard](index.png)
+![Dashboard](panel.png)
+![Dashboard](list.png)
+
 
 # Mémo
 
