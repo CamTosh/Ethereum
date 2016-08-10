@@ -79,7 +79,7 @@ function ping($url)  {
 				if (ping($k)) {
 					echo '<td class="positive">At work</td>';
 				} else {
-					echo '<td class="negative">Look\'s down</td>';
+					echo '<td class="negative">Looks down</td>';
 				}
 			?>
 		</tr>
