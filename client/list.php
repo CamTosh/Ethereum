@@ -47,9 +47,9 @@
 	?>
 	<table class="ui striped grey selectable celled table very compact ">
 		<p class="right aligned">{{ infos.Name }}<p>
-		<p class="left aligned">{{ infos.Ip }}<p>
+		<p>{{ infos.Ip }}<p>
 		<thead>
-			<tr class="center aligned">
+			<tr">
 				<th>Nom</th>
 				<th>Ip</th>
 				<th>Load</th>
@@ -77,30 +77,30 @@
 			foreach ((array) $d as $m) {
 			?>
 			<tr>
-				<td class="center aligned">{{ infos.Name }}</td>
-				<td class="center aligned">{{ infos.Ip }}</td>
+				<th>{{ infos.Name }}</th>
+				<th>{{ infos.Ip }}</th>
 				<tr ng-repeat="g in gpu">
 					<td></td>
 					<td></td>
-					<td ng-class="load()" class="center aligned">
+					<td ng-class="load()">
 						<span id="load"> {{ g.Load }} </span>%
 					</td>
-					<td ng-class="heat()" class="center aligned">
+					<td ng-class="heat()">
 						<span id="heat"> {{ g.Heat }} </span>°c
 					</td>
-					<td ng-class="fan()" class="center aligned">
+					<td ng-class="fan()">
 						<span id="fan"> {{ g.FanSpeed }} </span>%
 					</td>
-					<td ng-class="clock()" class="center aligned">
+					<td ng-class="clock()">
 						<span id="clock"> {{ (g.CurrentClock / g.MaxClock * 100).toFixed(2) }} </span>%
 					</td>
-					<td class="center aligned">
+					<td>
 						<span id="maxClock"> {{ g.MaxClock }} </span>MhZ
 					</td>
-					<td ng-class="mem()" class="center aligned">
+					<td ng-class="mem()">
 						<span id="mem"> {{ (g.CurrentMem / g.MaxMem * 100).toFixed(2) }} </span>%
 					</td>
-					<td class="center aligned">
+					<td>
 						<span id="maxMem"> {{ g.MaxMem }} </span>MhZ
 					</td>
 				</tr>

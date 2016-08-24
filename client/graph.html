@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>GPU Info</title>
+	<link rel="stylesheet" type="text/css" href="css/reset.css">
+	<link rel="stylesheet" type="text/css" href="css/design.css">
+<body>
+	<main>
+	<div class="container">
+			<section class="serv">
+				<header class="serv__head">
+					<div>
+						<h3 class="serv__name" id="serv_name">Kraken</h3>
+					</div>
+					<div class="serv__ip" id="serv_ip">EthEur | EthUsd | EthBtc</div>
+				</header>
+				<article class="serv__gpu">
+				<div id="one"></div>
+				<br>
+				</article>
+				<article class="serv__gpu">
+				<div id="two"></div>
+				<br>
+				</article>
+				<article class="serv__gpu">
+				<div id="three"></div>
+				<br>
+				</article>
+			</section>
+		</div>
+	</main>
+</body>
+
+<script type="text/javascript" src="https://cdn.cryptowat.ch/assets/build/scripts/dist/embed.js"></script>
+
+<script>
+	var charts = [
+		['kraken', 'etheur', 'one'],
+		['kraken', 'ethbtc', 'two'],
+		['kraken', 'ethusd', 'three']
+	]
+	charts.forEach(function (chart) {
+	    chart.push(new cryptowatch.Embed(chart[0], chart[1], {
+					timePeriod: '1h',
+					height: 320,
+				  	customColorScheme: {
+						bg:           "303030",
+						text:         "b2b2b2",
+						textStrong:   "e5e5e5",
+						textWeak:     "7f7f7f",
+						short:        "FD4600",
+						shortFill:    "FF672C",
+						long:         "6290FF",
+						longFill:     "002782",
+						cta:          "363D52",
+						ctaHighlight: "414A67",
+						alert:        "FFD506",
+					}})
+	    		)
+		chart[3].mount('#' + chart[2])
+	})
+</script>
+</html>
