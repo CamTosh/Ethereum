@@ -35,13 +35,13 @@ function ping($url)  {
 		<tfoot class="full-width">
 			<tr>
 				<th>
-					Dashboard
-				</th>
-				<th>
 					<a href="list.php"><div class="ui right floated small labeled icon blue basic button"><i class="list layout icon"></i>List</div></a>
 				</th>
 				<th>
 					<a href="dashboard.php"><div class="ui right floated small labeled icon blue basic button"><i class="grid  layout icon"></i> Grid</div></a>
+				</th>
+				<th>
+					<a href="graph.html"><div class="ui right floated small labeled icon blue basic button"><i class="bar chart icon"></i> Chart</div></a>
 				</th>
 			</tr>
 	  </tfoot>
