@@ -14,7 +14,7 @@ Le/les serveurs dans ```Master``` sont pour Geth.py et ceux dans ```Worker``` po
 
 # Buy me a :beer:
 
-Vous aimez mon travail ? Vous utilisez mon travail sur votre infrastructure ? Vous avez des idées d'ajout, de modification ? Faites le moi savoir : ctoche@pulseheberg.com :)
+Vous aimez mon travail ? Vous utilisez mon travail sur votre infrastructure ? Vous avez des idées d'ajout, de modification ? Faites le moi savoir : tochceamille@gmail.com :)
 
 Ethereum : 0xB3773eDC6540e6486897E2B6bA6BfA933793aDF6
 
