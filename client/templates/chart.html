@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Chart</title>
+	<link rel="stylesheet" type="text/css" href="../static/css/reset.css">
+	<link rel="stylesheet" type="text/css" href="../static/css/design.css">
+	<script src="https://unpkg.com/vue"></script>
+	<script type="text/javascript" src="https://static.cryptowat.ch/assets/scripts/embed.bundle.js"></script>
+
+<body>
+	<main id="app">
+		<div class="container" v-for="(item, index) in graphs">
+			<section class="serv">
+				<header class="serv__head">
+					<div>
+						<h3 class="serv__name" id="name">% item.market %</h3>
+					</div>
+				</header>
+				<article class="serv__gpu" v-for="chart in item.chart">
+					<div :id="item.market + chart.coin"></div>
+					<br>
+				</article>
+			</section>
+		</div>
+	</main>
+</body>
+
+<script>
+					
+		new Vue({
+			el: '#app',
+			delimiters: ['%', '%'],
+			data: {
+				graphs: null
+			},
+			mounted: function () {
+				this.loadData();
+				this.createGraphs();
+			},
+			methods: {
+
+				loadData: function () {
+					this.graphs = JSON.parse('{{ json|tojson|safe }}');
+				},
+				createGraphs: function () {
+
+					this.graphs.forEach(function(c) {
+						console.log(c);
+						c.chart.forEach(function(e) {
+							console.log(e);
+
+							var cw = new cryptowatch.Embed(c.market, e.coin, {
+								height: 320,
+								presetColorScheme: e.colorscheme,
+								timePeriod: e.timePeriod
+							});
+							var id = '#'.concat(c.market).concat(e.coin);
+							console.log(id);
+							cw.mount(id);
+						})
+					});
+				}
+			}
+		});
+</script>
+</html>

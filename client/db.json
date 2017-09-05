@@ -1,0 +1,22 @@
+{
+  "_default": {},
+  "master": {
+    "1": {
+      "ip": "localshost:4269",
+      "name": "Master",
+      "wallet": "0xb3773edc6540e6486897e2b6ba6bfa933793adf6"
+    }
+  },
+  "worker": {
+    "3": {
+      "rig": [
+        {
+          "name": "NickiMinaj",
+          "ip": "127.0.0.1:6969",
+          "index": 1
+        }
+      ],
+      "name": "Baie0"
+    }
+  }
+}

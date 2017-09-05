@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>GPU Info</title>
+		<link rel="stylesheet" type="text/css" href="../static/css/reset.css">
+		<link rel="stylesheet" type="text/css" href="../static/css/design.css">
+		<script src="https://unpkg.com/vue"></script>
+		<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	</head>
+	<body>
+		<main id="app">
+			<div class="container">
+				<section class="serv">
+					<header class="serv__head">
+						<div>
+							<span class="serv__status serv__status--up">
+								&#9679;
+							</span>
+							<h3 class="serv__name">
+								% worker.name %
+							</h3>
+						</div>
+						<div class="serv__ip">% worker.type % | <span> % worker.ip % </span></div>
+					</header>
+					<article class="serv__gpu" v-for="gpu in worker.gpus">
+						<div class="serv__grid-3">
+
+							<div class="serv__mod">
+								<div v-bind:class="gpu.color.load">
+									Load
+								</div>
+								<div class="serv__modNumber">
+									<span id="load"> % gpu.load % </span>
+									<label class="serv__modUnit">%</label>
+								</div>
+							</div>
+
+							<div class="serv__mod">
+								<div v-bind:class="gpu.color.temperature">
+									Heat
+								</div>
+								<div class="serv__modNumber">
+									<span id="heat"> % gpu.temperature % </span>
+									<label class="serv__modUnit">&deg;C</label>
+								</div>
+							</div>
+
+							<div class="serv__mod">
+								<div v-bind:class="gpu.color.fan">
+									Fan
+								</div>
+								<div class="serv__modNumber">
+									<span id="fan"> % gpu.fan % </span>
+									<label class="serv__modUnit">%</label>
+								</div>
+							</div>
+
+							<div class="serv__mod">
+								<div  v-bind:class="gpu.color.clock">
+									Clock
+									<div class="serv__modSublabel">Max</div>
+								</div>
+								<div class="serv__modNumber">
+									% gpu.clock.percent %
+									<label class="serv__modUnit">%</label>
+									<div class="serv__modSubnumbler">
+										% gpu.clock.total % mHz
+									</div>
+								</div>
+							</div>
+
+							<div class="serv__mod">
+								<div v-bind:class="gpu.color.memory">
+									Mem
+									<div class="serv__modSublabel">Max</div>
+								</div>
+								<div class="serv__modNumber">
+									% gpu.memory.percent %
+									<span></span>
+									<label class="serv__modUnit">%</label>
+									<div class="serv__modSubnumbler">
+										% gpu.memory.total % mHz
+									</div>
+								</div>
+							</div>
+						</div>
+					</article>
+				</section>
+			</div>
+		</main>
+	</body>
+	<script type="text/javascript">
+
+		new Vue({
+			el: '#app',
+			delimiters: ['%', '%'],
+			data: {
+				worker: null,
+				interval: null
+			},
+			mounted: function () {
+
+				this.ready();
+			},
+			methods: {
+
+				loadData: function () {
+					$.get('{{ ip }}', function (response) {
+						this.worker = JSON.parse(response).data;
+				 		this.calcPercent();
+						this.addColor();
+					}.bind(this));
+				},
+
+				ready: function () {
+					this.loadData();
+
+					this.interval = setInterval(function () {
+						this.loadData();
+					}.bind(this), 1000); 
+				},
+				beforeDestroy: function(){
+					clearInterval(this.interval);
+				},
+
+				el: function (ele) {
+					if (this.worker.ele == ele) {
+						return true;
+					} else {
+						return false;
+					}
+				},
+
+				calcPercent: function () {
+					this.worker.gpus.forEach(function(element) {
+						mem   = element.memory.used / element.memory.total * 100; 
+						clock = element.clock.used / element.clock.total * 100; 
+
+						element.clock.percent = clock.toFixed(2);
+						element.memory.percent = mem.toFixed(2);
+					});
+				},
+
+				addColor: function () {
+
+					this.worker.gpus.forEach(function(e) {
+
+
+						e.color = {
+							"load": null,
+							"fan": null,
+							"memory": null,
+							"clock": null,
+							"temperature": null
+						};
+
+						var val = [
+								{
+									"title": "load",
+									"item": e.load
+								},
+								{
+									"title": "fan",
+									"item": e.fan
+								},
+								{
+									"title": "memory",
+									"item": e.memory.percent
+								},
+								{
+									"title": "clock",
+									"item": e.clock.percent
+								},
+								{
+									"title": "temperature",
+									"item": e.temperature
+								}
+							];
+						
+						val.forEach(function(el) {
+
+							var title = el.title;
+							var item = el.item;
+
+							if (item < 50) {
+
+								e.color[title] = "serv__modLabel serv__modLabel--green";
+
+							} else if (item >= 50 && item <= 80) {
+
+								e.color[title] = "serv__modLabel serv__modLabel--yellow";
+
+							} else if (item > 80) {
+
+								e.color[title] = "serv__modLabel serv__modLabel--red";
+
+							}
+							
+						});
+					});
+				}
+			}
+		});
+	</script>
+</html>

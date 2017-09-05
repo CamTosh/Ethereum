@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Mining dashboard</title>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.2/semantic.min.css">
+		<script src="https://unpkg.com/vue"></script>
+	</head>
+	<body>
+		<center>
+			<div class="ui info message">
+				<div class="header">Thanks for use this dashboard !</div>
+				<p>There is still in development but you can contribute : <a href="https://github.com/CamTosh/Ethereum/" target="_blank">Github</a></p>
+			</div>
+			<div id="app">
+				<table class="ui orange table collapsing celled">
+					<tfoot class="full-width">
+					<tr>
+						<th>
+							<a href="/list">
+								<div class="ui right floated small labeled icon blue basic button">
+									<i class="list layout icon"></i>List
+								</div>
+							</a>
+						</th>
+						<th>
+							<a href="/dashboard">
+								<div class="ui right floated small labeled icon blue basic button">
+									<i class="grid  layout icon"></i> Grid
+								</div>
+							</a>
+						</th>
+						<th>
+							<a href="/chart">
+								<div class="ui right floated small labeled icon blue basic button">
+									<i class="bar chart icon"></i> Chart
+								</div>
+							</a>
+						</th>
+					</tr>
+					</tfoot>
+				</table>
+				<table class="ui green table collapsing selectable celled">
+					<thead>
+						<tr>
+							<th>Master</th>
+							<th>Link</th>
+							<th>Status</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr v-for="(item, index) in masters">
+							<td><a href="" target="_blank">% item %</a></td>
+							<td>
+								<a href="" target="_blank">Single page</a>
+							</td>
+							{% if ping(json['master'][0]) %}
+								<td class="positive">At work</td>
+							{% else %}
+								<td class="negative">Looks down</td>
+							{% endif %}
+
+						</tr>
+					</tbody>
+				</table>
+				<table class="ui blue table collapsing selectable celled">
+					{% for value in json['worker'] %}
+						<thead>
+							<tr>
+								<th>{{ value['name'] }}</th>
+								<th>Link</th>
+								<th>Status</th>
+							</tr>
+						</thead>
+						<tbody>
+							{% for val in value['rig'] %}
+								<tr>
+									<td>
+										{{ val['name'] }}
+									</td>
+									<td>
+										<a href="/detail/{{ val['index'] }}" target="_blank">Single page</a>
+									</td>
+									{% if ping(val['name'] ) %}
+										<td class="positive">At work</td>
+									{% else %}
+										<td class="negative">Looks down</td>
+									{% endif %}
+								</tr>
+							{% endfor %}
+						</tbody>
+					{% endfor %}
+				</table>
+				
+			</div>
+		</center>
+		<script type="text/javascript">
+			var config = JSON.parse('{{ json|tojson|safe }}');
+			new Vue({
+				el: '#app',
+				delimiters: ['%', '%'],
+				data: {
+					masters: null,
+					workers: null
+				},
+				mounted: function () {
+					this.fetchData();
+				},
+				methods: {
+					fetchData: function () {
+						this.masters = config['master'];
+						this.workers = config['worker'];
+					}
+				}
+			});
+		</script>
+	</body>
+</html>

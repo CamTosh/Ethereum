@@ -1,25 +1,66 @@
 {
-	"master": [
-		{
+	"master": {
 			"ip": "localhost:4249"
+		},
+	"worker": [
+		{ 
+			"name": "Baie 0",
+			"rig": [
+				{
+					"index": 1,
+					"name": "Nicki Minaj",
+					"ip": "127.0.0.1:6969"
+				},
+				{
+					"index": 2,
+					"name": "Roger",
+					"ip": "localhost:4242"
+				}
+			]
+		},
+		{
+			"name": "Baie 1",
+			"rig": [
+				{
+					"index": 3,
+					"name": "Toast",
+					"ip": "122.0.0.0:6969"
+				},
+				{
+					"index": 4,
+					"name": "Francoise",
+					"ip": "127.0.0.2:6969"
+				}
+			]
 		}
 	],
-	"worker": [
-		[
-			"localhost:4242",
-			"localhost:4242"
-		],
-		[
-			"localhost:4242",
-			"localhost:6532"
-		],
-		[
-			"localhost:4242",
-			"localhost:4242"
-		],
-		[
-			"localhost:5656",
-			"localhost:4242"
-		]
+
+	"charts": [
+		{
+			"market": "kraken",
+			"chart": [
+				{
+					"coin": "etheur",
+					"timeperiod": "30min",
+					"colorscheme": "standard"
+				}
+			]	
+		},
+		{
+			"market": "bitfinex",
+			"chart": [
+				{
+					"coin": "etceur",
+					"timeperiod": "4h",
+					"colorscheme": "candycane"
+				},
+				{
+					"coin": "btcusd",
+					"timePeriod": "1w",
+					"colorScheme": "albuquerque"
+				}
+			]
+		}
 	]
+
 }
