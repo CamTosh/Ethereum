@@ -7,110 +7,64 @@
 
 # Configuration
 
-La configuration se passe dans le fichier client/config.json.
-Il suffit de modifier, ajouter ou supprimer des IP. Pas besoin de spécifier le protocol HTTP mais il faut impérativement mettre le port. 
+The configuration file is client/config.json.
+Just add, edit or delete address(es). You don't have to specify the protocol putting ```http://``` at the begin but you must define the port.
 
-Le/les serveurs dans ```Master``` sont pour Geth.py et ceux dans ```Worker``` pour Gpu.py. 
+The address(es) on ```Master``` are for geth.py and these on ```Worker``` for gpu.py.
 
-# Buy me a :beer:
 
-Vous aimez mon travail ? Vous utilisez mon travail sur votre infrastructure ? Vous avez des idées d'ajout, de modification ? Faites le moi savoir : tochecamille@gmail.com :)
-
-Ethereum : 0xB3773eDC6540e6486897E2B6bA6BfA933793aDF6
-
-[Paypal](https://www.paypal.me/CamTosh) 
-
-# Images
+# Screenshots
 
 ![Dashboard](panel.png)
 ![Dashboard](index.png)
 ![Dashboard](list.png)
 
 
-# Mémo
+# Memo
 
-Les serveurs tournent sur [Ubuntu 14.04](http://cdimage.ubuntu.com/netboot/14.04/), il faut activer le pilote graphique propriétaire d'ATI pour le bon fonctionnement. Les cartes graphiques sont des r9 290.
+It's just a dashboard! You must install [Geth](https://github.com/ethereum/go-ethereum) and [Ethminer](https://github.com/ethereum-mining/ethminer).
 
-> Installation geth, ethereum et ethminer : 
+Then you must run them: 
 
+### Geth
 ```
-λ bash <(curl https://install-geth.ethereum.org -L)
-λ bash <(curl https://install-eth.ethereum.org -L)
-λ apt-get install ethminer
-```
-
-> Lancement des logiciels : 
-
-```
-λ Geth --rpc--rpcaddr ipDuServeurGeth --rpcport 8008 console
+# Geth --rpc --rpcaddr 127.0.0.1 --rpcport 8008 console
 ```
 
-```
-λ ethminer -G --opencl-device 0,1,2,3 --no-precompute -F ipDuServeurGeth:8008
-```
-
-Il ce peut que les toutes les cartes graphiques ne soient pas utilisées, dans ce cas il faut lancer dans des terminaux différents.
-
-L'argument ```--opencl-device``` (suivit d'un chiffre correspondant au numéro de la carte graphique) permet de choisir sur quelle(s) carte(s) graphique le minage se lancera.
-
-Par exemple pour miner avec la seconde carte graphique :
+### Ethminer
 
 ```
-λ ethminer -G --opencl-device 1 --no-precompute -F ipDuServeurGeth:8008
+# ethminer -F 127.0.0.1:8008 <your options>
 ```
-
-## Overclock
-
-Mes réglages pour l'overclocking des cartes graphiques : 
-
-[Page utile](https://wiki.archlinux.org/index.php/AMD_Catalyst#GPU.2FMem_frequency.2C_Temperature.2C_Fan_speed.2C_Overclocking_utilities)
-
-> Passage de la vitesse des ventilateurs de 0 à 100% sur toutes les cartes graphiques : 
-
-```
-λ aticonfig --pplib-cmd "set fanspeed 0 100" --adapter=all
-```
-> Activation de la possibilité d'overclocking sur toutes les cartes graphiques : 
-
-```
-λ aticonfig --od-enable --adapter=all
-```
-
-> Augmentation de la vitesse d'horloge à 1100 ainsi que la vitesse de la mémoire à 1400 sur toutes les cartes graphiques : 
-
-```
-λ amdconfig --odsc=1100,1400 --adapter=all
-```
-
-**Attention, des erreurs peuvent survenir, à manipuler avec attention. Les capacitées d'overclockings peuvent varier suivant les cartes, l'alimentation ou encore la chaleur.**
 
 ### gpu.py
 
-Nécéssite [aticonfig](https://doc.ubuntu-fr.org/aticonfig)
+It needs [aticonfig](https://wiki.debian.org/ATIProprietary/Configuration)
 
+Run as root:
 ```
-λ apt-get install -y python3 python3-pip
-λ python3 -m pip install subprocess locale requests bottle json socket netifaces datetime
-λ python3 gpu.py
+# apt-get install -y python3 python3-pip
+# python3 -m pip install subprocess locale requests bottle json socket netifaces datetime
+# python3 gpu.py
 ```
 
 ### geth.py
 
-Nécéssite [geth](https://github.com/ethereum/go-ethereum/releases)
+It needs [geth](https://github.com/ethereum/go-ethereum/releases)
 
+Run as root:
 ```
-λ apt-get install -y python3 python3-pip
-λ python3 -m pip install eth_rpc_client subprocess requests bottle netifaces json socket datetime
-λ python3 geth.py
+# apt-get install -y python3 python3-pip
+# python3 -m pip install eth_rpc_client subprocess requests bottle netifaces json socket datetime
+# python3 geth.py
 ```
 
 
-## Utilisation :
+## Usage:
 
-En HTTP aller sur l'ip du serveur au port 6969 (pour gpu.py) ou 4269 (pour geth.py)
+Open the browser and go on MinerIPAddr:6969 (for gpu.py) or MinerIPAddr:4269 (for geth.py)
 
-Exemple de retour de gpu.py :
-
+If you are using gpu.py, you should read something like this:
 ```
 {
 	data: {
@@ -143,7 +97,7 @@ Exemple de retour de gpu.py :
 }
 ```
 
-Exemple de retour de geth.py :
+Instead, if you are running geth.py, you should read something like this:
 
 ```
 {
@@ -160,36 +114,45 @@ Exemple de retour de geth.py :
 }
 ```
 
-## Méthodes
 
-> gpu.py
+## Server API:
 
-- Class : GPUinfo
+## gpu.py
 
-	- getLoad : retourne l'utilisation du GPU
-	- getTemperature : retourne la température du GPU
-	- getFanspeed : retourne la vitesse du/des ventilateur(s) du GPU
-	- getMaxClock : retourne la vitesse d'horloge maximale du GPU
-	- getCurrentClock : retourne la vitesse d'horloge acutelle du GPU
-	- getMaxClock : retourne la vitesse maximale de la mémoire du GPU
-	- getCurrentClock : retourne la vitesse acutelle de la mémoire du GPU
-	- getInformation : retourne le résultat de la commande ```aticonfig --odgc```
-	- get_adapter : retourne le nombre de cartes graphiques que reconnait aticonfig.
+- Class: GPUinfo
 
-- get_uptime : retourne l'uptime
-- get_name : retourne l'hostname de la machine
-- get_ip : retourne l'ip de la machine (eth0)
+	- getLoad: return GPU load
+	- getTemperature: return GPU temperature
+	- getFanspeed: return the GPU's fan speed
+	- getMaxClock: return the GPU's graphics clock limit
+	- getCurrentClock: return the GPU's graphics clock
+	- getMaxMem: return the GPU's memory clock limit
+	- getCurrentMem: return the GPU's memory clock
+	- getInformation: return ```aticonfig --odgc``` output
+	- get_adapter: return the number of graphics card recognized by aticonfig
 
-> geth.py
+- get_uptime: return miner uptime (not mining software uptime!)
+- get_name: return miner hostname
+- get_ip: return miner IP (eth0)
+
+## geth.py
 
 - Class : RpcJson
 
-	- json : retourne le résultat de la requête en Json sur l'API de Geth
-	- getEuroBalance : retourne la balance en €
-	- getHashrate : retourne la hashrate actuelle
-	- getBalance : retourne le nombre d'Ether dans le wallet
-	- getAccounts : retourne l'adresse du compte
+	- json: return the output of Geth's API
+	- getEuroBalance: return the balance in €
+	- getHashrate: return the hashrate
+	- getBalance: return the wallet's balance
+	- getAccounts: return the wallet's address
 
-- get_uptime : retourne l'uptime
-- get_name : retourne l'hostname de la machine
-- get_ip : retourne l'ip de la machine
+- get_uptime: return miner uptime (not mining software uptime!)
+- get_name: return miner hostname
+- get_ip: return miner IP (eth0)
+
+# Buy me a :beer:
+
+Do you like this repo? Are you using it on your miners? Do you have any idea to improve this repo? Let me know: tochecamille@gmail.com :)
+
+Ethereum: 0xB3773eDC6540e6486897E2B6bA6BfA933793aDF6
+
+[Paypal](https://www.paypal.me/CamTosh)
