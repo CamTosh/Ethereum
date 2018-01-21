@@ -28,7 +28,7 @@ Then you must run them:
 
 ### Geth
 ```
-# Geth --rpc --rpcaddr 127.0.0.1 --rpcport 8008 console
+# geth --rpc --rpcaddr 127.0.0.1 --rpcport 8008 console
 ```
 
 ### Ethminer
@@ -153,6 +153,6 @@ Instead, if you are running geth.py, you should read something like this:
 
 Do you like this repo? Are you using it on your miners? Do you have any idea to improve this repo? Let me know: tochecamille@gmail.com :)
 
-Ethereum: 0xB3773eDC6540e6486897E2B6bA6BfA933793aDF6
+Ethereum: 0x37C8aB6329Dd4541ec178d3FfAe834e61f536874
 
 [Paypal](https://www.paypal.me/CamTosh)
